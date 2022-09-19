@@ -3,4 +3,4 @@ project(ConsoleSurvivor)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(ConsoleSurvivor main.cpp)
+add_executable(ConsoleSurvivor "src/main.cpp" "src/idConsoleSurvivorGame.cpp")

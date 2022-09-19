@@ -1,6 +1,7 @@
 /.vs
 /cmake-build-debug
 /.idea
+/out
 
 # Prerequisites
 *.d

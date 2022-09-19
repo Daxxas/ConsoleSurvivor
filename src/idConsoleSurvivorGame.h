@@ -8,4 +8,5 @@ class idConsoleSurvivorGame {
 		void HandleInput();
 		void ErrorExit(LPSTR);
 		void launchGame();
+        void PrepareWindowStyle();
 };

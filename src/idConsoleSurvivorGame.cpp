@@ -24,6 +24,8 @@ idConsoleSurvivorGame::idConsoleSurvivorGame(){
 }
 
 void idConsoleSurvivorGame::launchGame() {
+    idConsoleSurvivorGame::PrepareWindowStyle();
+
     gameIsRunning = true;
 	
     HANDLE hOutput = (HANDLE)GetStdHandle(STD_OUTPUT_HANDLE);
@@ -131,6 +133,35 @@ void idConsoleSurvivorGame::HideCaret(HANDLE hOutput) {
     GetConsoleCursorInfo(hOutput, &cursorInfo);
     cursorInfo.bVisible = false; // set the cursor visibility
     SetConsoleCursorInfo(hOutput, &cursorInfo);
+}
+
+void idConsoleSurvivorGame::PrepareWindowStyle() {
+    LONG_PTR new_style =  WS_OVERLAPPEDWINDOW;
+    HWND hwnd_console = GetConsoleWindow();
+
+    ShowWindow(hwnd_console, SW_MAXIMIZE);
+
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    // retrieve screen buffer info
+    CONSOLE_SCREEN_BUFFER_INFO scrBufferInfo;
+    GetConsoleScreenBufferInfo(hOut, &scrBufferInfo);
+
+    // current window size
+    short winWidth = scrBufferInfo.srWindow.Right - scrBufferInfo.srWindow.Left + 1;
+    short winHeight = scrBufferInfo.srWindow.Bottom - scrBufferInfo.srWindow.Top + 1;
+
+    // current screen buffer size
+    short scrBufferWidth = scrBufferInfo.dwSize.X;
+    short scrBufferHeight = scrBufferInfo.dwSize.Y;
+
+    // to remove the scrollbar, make sure the window height matches the screen buffer height
+    COORD newSize;
+    newSize.X = scrBufferWidth;
+    newSize.Y = winHeight;
+
+    // set the new screen buffer dimensions
+    SetConsoleScreenBufferSize(hOut, newSize);
 }
 
 void idConsoleSurvivorGame::KeyEventProc(KEY_EVENT_RECORD ker)

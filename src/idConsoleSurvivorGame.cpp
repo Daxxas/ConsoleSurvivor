@@ -29,39 +29,10 @@ void idConsoleSurvivorGame::launchGame() {
     gameIsRunning = true;
 	
     HANDLE hOutput = (HANDLE)GetStdHandle(STD_OUTPUT_HANDLE);
-    HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);
 
     COORD dwBufferSize = { SCREEN_WIDTH, SCREEN_HEIGHT };
     COORD dwBufferCoord = { 0, 0 };
     SMALL_RECT rcRegion = { 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1 };
-	
-    DWORD cNumRead, fdwMode, i;
-    INPUT_RECORD irInBuf[128];
-    int counter = 0;
-
-    // Get the standard input handle.
-
-    hStdin = GetStdHandle(STD_INPUT_HANDLE);
-    if (hStdin == INVALID_HANDLE_VALUE)
-        ErrorExit("GetStdHandle");
-
-    // Save the current input mode, to be restored on exit.
-
-    if (!GetConsoleMode(hStdin, &fdwSaveOldMode))
-        ErrorExit("GetConsoleMode");
-
-    // Enable the window and mouse input events.
-
-    fdwMode = ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT;
-    if (!SetConsoleMode(hStdin, fdwMode))
-        ErrorExit("SetConsoleMode");
-
-    // Loop to read and handle the next 100 input events.
-	
-    ReadConsoleOutput(hOutput, (CHAR_INFO*)buffer, dwBufferSize, dwBufferCoord, &rcRegion);
-
-    fdwMode = ENABLE_WINDOW_INPUT;
-    SetConsoleMode(hInput, fdwMode);
 
     HideCaret(hOutput);
 
@@ -87,44 +58,9 @@ void idConsoleSurvivorGame::launchGame() {
     buffer[pos_y][pos_x].Attributes = 0x0001;
 
 
-    WriteConsoleOutput(hOutput, (CHAR_INFO*)buffer, dwBufferSize,
-        dwBufferCoord, &rcRegion);
+    WriteConsoleOutput(hOutput, (CHAR_INFO*)buffer, dwBufferSize, dwBufferCoord, &rcRegion);
 
     cin.ignore();
-
-    // Loop to read and handle the next 100 input events.
-
-    while (counter++ <= 100)
-    {
-        // Wait for the events.
-
-        if (!ReadConsoleInput(
-            hStdin,      // input buffer handle
-            irInBuf,     // buffer to read into
-            128,         // size of read buffer
-            &cNumRead)) // number of records read
-            ErrorExit("ReadConsoleInput");
-
-        // Dispatch the events to the appropriate handler.
-
-        for (i = 0; i < cNumRead; i++)
-        {
-            switch (irInBuf[i].EventType)
-            {
-            case KEY_EVENT: // keyboard input
-                KeyEventProc(irInBuf[i].Event.KeyEvent);
-                break;
-            case FOCUS_EVENT:  // disregard focus events
-            case MENU_EVENT:   // disregard menu events
-                break;
-            default:
-                ErrorExit("Unknown event type");
-                break;
-            }
-        }
-    }
-
-    SetConsoleMode(hStdin, fdwSaveOldMode);
 }
 
 void idConsoleSurvivorGame::HideCaret(HANDLE hOutput) {

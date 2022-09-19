@@ -1,12 +1,12 @@
 #include <iostream>
 #include <windows.h>
 
-#include "idConsoleSurvivorGame.h"
+#include "ConsoleSurvivorGame.h"
 
 using namespace std;
 
 int main() {
-    idConsoleSurvivorGame game = idConsoleSurvivorGame();
+    ConsoleSurvivorGame game = ConsoleSurvivorGame();
     game.launchGame();
     return 0;
 }

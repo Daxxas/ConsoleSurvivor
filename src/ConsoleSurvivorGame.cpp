@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <stdio.h>
 
-#include "idConsoleSurvivorGame.h"
+#include "ConsoleSurvivorGame.h"
 	        
 using namespace std;
 
@@ -19,22 +19,22 @@ CHAR_INFO buffer[SCREEN_HEIGHT][SCREEN_WIDTH];
 HANDLE hStdin;
 DWORD fdwSaveOldMode;
 
-idConsoleSurvivorGame::idConsoleSurvivorGame(){
+ConsoleSurvivorGame::ConsoleSurvivorGame(){
     cout << "Hello World!";
 }
 
-void idConsoleSurvivorGame::launchGame() {
-    idConsoleSurvivorGame::PrepareWindowStyle();
+void ConsoleSurvivorGame::launchGame() {
+    HANDLE hOutput = (HANDLE)GetStdHandle(STD_OUTPUT_HANDLE);
+
+    ConsoleSurvivorGame::PrepareWindowStyle(hOutput);
 
     gameIsRunning = true;
-	
-    HANDLE hOutput = (HANDLE)GetStdHandle(STD_OUTPUT_HANDLE);
 
     COORD dwBufferSize = { SCREEN_WIDTH, SCREEN_HEIGHT };
     COORD dwBufferCoord = { 0, 0 };
     SMALL_RECT rcRegion = { 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1 };
 
-    HideCaret(hOutput);
+    ReadConsoleOutput( hOutput, (CHAR_INFO *)buffer, dwBufferSize,dwBufferCoord, &rcRegion );
 
     for (int i = 0; i < SCREEN_WIDTH; ++i) {
         buffer[0][i].Char.AsciiChar = '#';
@@ -49,7 +49,7 @@ void idConsoleSurvivorGame::launchGame() {
     for (int i = 1; i < SCREEN_HEIGHT - 1; ++i) {
         for (int j = 1; j < SCREEN_WIDTH - 1; ++j) {
             buffer[i][j].Char.AsciiChar = '.';
-            // Dark charater attribute
+
             buffer[i][j].Attributes = 0x0005;
         }
     }
@@ -63,7 +63,7 @@ void idConsoleSurvivorGame::launchGame() {
     cin.ignore();
 }
 
-void idConsoleSurvivorGame::HideCaret(HANDLE hOutput) {
+void ConsoleSurvivorGame::HideCaret(HANDLE hOutput) {
     // Hide Caret
     CONSOLE_CURSOR_INFO cursorInfo;
     GetConsoleCursorInfo(hOutput, &cursorInfo);
@@ -71,17 +71,13 @@ void idConsoleSurvivorGame::HideCaret(HANDLE hOutput) {
     SetConsoleCursorInfo(hOutput, &cursorInfo);
 }
 
-void idConsoleSurvivorGame::PrepareWindowStyle() {
-    LONG_PTR new_style =  WS_OVERLAPPEDWINDOW;
+void ConsoleSurvivorGame::PrepareWindowStyle(HANDLE hOutput) {
     HWND hwnd_console = GetConsoleWindow();
-
     ShowWindow(hwnd_console, SW_MAXIMIZE);
-
-    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
     // retrieve screen buffer info
     CONSOLE_SCREEN_BUFFER_INFO scrBufferInfo;
-    GetConsoleScreenBufferInfo(hOut, &scrBufferInfo);
+    GetConsoleScreenBufferInfo(hOutput, &scrBufferInfo);
 
     // current window size
     short winWidth = scrBufferInfo.srWindow.Right - scrBufferInfo.srWindow.Left + 1;
@@ -97,28 +93,6 @@ void idConsoleSurvivorGame::PrepareWindowStyle() {
     newSize.Y = winHeight;
 
     // set the new screen buffer dimensions
-    SetConsoleScreenBufferSize(hOut, newSize);
+    SetConsoleScreenBufferSize(hOutput, newSize);
+    HideCaret(hOutput);
 }
-
-void idConsoleSurvivorGame::KeyEventProc(KEY_EVENT_RECORD ker)
-{
-    printf("Key event: ");
-
-    if (ker.bKeyDown) {
-        pos_y--;
-        printf("key pressed\n");
-    }
-    else printf("key released\n");
-}
-
-void idConsoleSurvivorGame::ErrorExit(LPSTR lpszMessage)
-{
-    fprintf(stderr, "%s\n", lpszMessage);
-
-    // Restore input mode on exit.
-
-    SetConsoleMode(hStdin, fdwSaveOldMode);
-
-    ExitProcess(0);
-}
-

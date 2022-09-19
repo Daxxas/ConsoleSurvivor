@@ -35,3 +35,7 @@
 *.exe
 *.out
 *.app
+ConsoleSurvivor.sln
+*.vcxproj
+ConsoleSurvivor.vcxproj.filters
+ConsoleSurvivor.vcxproj.user

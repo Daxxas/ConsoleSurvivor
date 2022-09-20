@@ -17,8 +17,8 @@ void ConsoleSurvivorGame::launchGame() {
 
     ConsoleSurvivorGame::PrepareWindowStyle(hOutput);
 
-    GameManager gameManager = GameManager();
-    Renderer renderer = Renderer(hOutput);
+    GameManager *gameManager = new GameManager();
+    Renderer *renderer = new Renderer(hOutput);
 
     this->timer.start();
     int sleepTime = 0;
@@ -28,8 +28,8 @@ void ConsoleSurvivorGame::launchGame() {
     while(gameIsRunning) {
         this->timer.getElapsedMs(true);
 		
-        gameManager.RunGameLoop();
-        renderer.Render();
+        gameManager->RunGameLoop();
+        renderer->Render();
 
         loopDurationMs = this->timer.getElapsedMs(true);
 

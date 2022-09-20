@@ -8,7 +8,8 @@
 
 class Player : Entity {
 public:
-    Player(Vector2, int, int, int);
+    Player(Vector2 position, int maxHealth, int damage);
+
     void Damage(int damage);
     void SetPosition(Vector2 position) override;
     Vector2 GetPosition() override;

@@ -23,7 +23,7 @@ void ConsoleSurvivorGame::launchGame() {
     ConsoleSurvivorGame::PrepareWindowStyle(hOutput);
 
     GameManager *gameManager = new GameManager();
-    Renderer *renderer = new Renderer(hOutput);
+    Renderer *renderer = new Renderer(hOutput, gameManager);
 
     this->timer.start();
     int sleepTime = 0;

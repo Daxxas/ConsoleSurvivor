@@ -6,7 +6,10 @@
 #include <windows.h>
 
 GameManager::GameManager() {
-
+	player = new Player(Vector2(10, 10), 1, 1);
+    player->isActive = true;
+    entities[0] = player;
+    validEntityCount++;
 }
 
 void GameManager::RunGameLoop() {

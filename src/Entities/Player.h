@@ -6,19 +6,20 @@
 #define CONSOLESURVIVOR_PLAYER_H
 
 
-class Player : Entity {
+class Player : public Entity {
 public:
     Player(Vector2 position, int maxHealth, int damage, float attacksPerSecond);
 
     void Damage(int damage);
     void SetPosition(Vector2 position) override;
     Vector2 GetPosition() override;
-    std::string* Display() override;
+    CHAR_INFO* Display() override;
 private:
     int maxHealth;
     int health;
     int damage;
     float attacksPerSecond;
+    CHAR_INFO* sprite;
 };
 
 

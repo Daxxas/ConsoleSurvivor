@@ -6,4 +6,5 @@ class GameManager {
         Player * player;
 		InputHandler inputHandler;
 		void RunGameLoop();
+        int validEntityCount = 0;
 };

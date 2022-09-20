@@ -2,7 +2,11 @@
 #include <stdio.h>
 #include <string>
 #include "NYTimer.h"
+#include "Vector2.h"
+#include "Entities/Entity.h"
+#include "Entities/Player.h"
 #include "ConsoleSurvivorGame.h"
+#include <WinUser.h>
 #include "GameManager.h"
 #include "Renderer.h"
 

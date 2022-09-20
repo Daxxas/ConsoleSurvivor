@@ -39,11 +39,9 @@ void ConsoleSurvivorGame::launchGame() {
 
         if (sleepTime >= 0) {
             Sleep(sleepTime);
-            OutputDebugStringW(L"SLEPT OK.");
         }
         else {
             // Less than 60fps
-            OutputDebugStringW(L"sa lag frere.");
         }
     }
 }

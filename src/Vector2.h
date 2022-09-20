@@ -6,6 +6,7 @@
 #define CONSOLESURVIVOR_VECTOR2_H
 
 struct Vector2 {
+public:
     Vector2(int x, int y);
 
     int x;

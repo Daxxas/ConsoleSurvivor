@@ -1,8 +1,6 @@
-#include <iostream>
 #include <windows.h>
 #include <stdio.h>
-#include <string> 
-
+#include <string>
 #include "NYTimer.h"
 #include "ConsoleSurvivorGame.h"
 #include "GameManager.h"
@@ -19,7 +17,7 @@ void ConsoleSurvivorGame::launchGame() {
 
     ConsoleSurvivorGame::PrepareWindowStyle(hOutput);
 
-    GameManager gameManager;
+    GameManager gameManager = GameManager();
     Renderer renderer = Renderer(hOutput);
 
     this->timer.start();

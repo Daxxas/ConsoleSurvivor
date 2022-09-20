@@ -2,8 +2,8 @@
 // Created by Jacques on 20/09/2022.
 //
 
-#include "Renderer.h"
 #include <windows.h>
+#include "Renderer.h"
 
 Renderer::Renderer(HANDLE hOutput) {
     this->hOutput = hOutput;

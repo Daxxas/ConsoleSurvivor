@@ -5,12 +5,11 @@
 #ifndef CONSOLESURVIVOR_RENDERER_H
 #define CONSOLESURVIVOR_RENDERER_H
 
-#include <windows.h>
 
 
 class Renderer {
 public:
-    static const int DISPLAY_WIDTH = 600;
+    static const int DISPLAY_WIDTH = 90;
     static const int DISPLAY_HEIGHT = 50;
     void Render();
     Renderer(HANDLE);

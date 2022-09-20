@@ -15,6 +15,7 @@ GameManager::GameManager() {
 void GameManager::RunGameLoop() {
 	Vector2* direction = this->inputHandler.DetectMovementDirectionFromPlayer();
 	
+	player->position = player->position.add(*direction); // multiplier par speed
 	// manage player direction
 	// manage entities movement
 	// manage shooting

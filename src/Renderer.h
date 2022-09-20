@@ -1,10 +1,3 @@
-//
-// Created by Jacques on 20/09/2022.
-//
-
-#ifndef CONSOLESURVIVOR_RENDERER_H
-#define CONSOLESURVIVOR_RENDERER_H
-
 class Renderer {
 public:
     static const int DISPLAY_WIDTH = 90;
@@ -17,6 +10,3 @@ private:
     GameManager* gameManager;
     void DisplayArena();
 };
-
-
-#endif //CONSOLESURVIVOR_RENDERER_H

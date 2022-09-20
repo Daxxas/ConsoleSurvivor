@@ -1,4 +1,8 @@
 #include <windows.h>
+#include "Vector2.h"
+#include "InputHandler.h"
+#include "Entities/Entity.h"
+#include "Entities/Player.h"
 #include "GameManager.h"
 #include "Renderer.h"
 

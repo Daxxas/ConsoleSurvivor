@@ -1,15 +1,3 @@
-//
-// Created by Jacques on 20/09/2022.
-//
-
-#ifndef CONSOLESURVIVOR_ENTITY_H
-#define CONSOLESURVIVOR_ENTITY_H
-
-#include <windows.h>
-#include "../Vector2.h"
-#include <string>
-
-
 class Entity {
 public:
     Entity(Vector2 position);
@@ -23,5 +11,3 @@ public:
     int spriteHeight;
 };
 
-
-#endif //CONSOLESURVIVOR_ENTITY_H

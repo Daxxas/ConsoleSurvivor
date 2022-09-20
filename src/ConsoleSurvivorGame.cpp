@@ -1,16 +1,17 @@
 #include <iostream>
 #include <windows.h>
 #include <stdio.h>
+#include <string> 
 
+#include "NYTimer.h"
 #include "ConsoleSurvivorGame.h"
+#include "GameManager.h"
 #include "Renderer.h"
 
 using namespace std;
 
-bool gameIsRunning = true;
-
 ConsoleSurvivorGame::ConsoleSurvivorGame(){
-
+    this->timer = NYTimer();
 }
 
 void ConsoleSurvivorGame::launchGame() {
@@ -18,11 +19,32 @@ void ConsoleSurvivorGame::launchGame() {
 
     ConsoleSurvivorGame::PrepareWindowStyle(hOutput);
 
-//    GameManager gameManager;
+    GameManager gameManager;
     Renderer renderer = Renderer(hOutput);
 
+    this->timer.start();
+    int sleepTime = 0;
+    unsigned long loopDurationMs;
+    bool gameIsRunning = true;
+	
     while(gameIsRunning) {
+        this->timer.getElapsedMs(true);
+		
+        gameManager.RunGameLoop();
         renderer.Render();
+
+        loopDurationMs = this->timer.getElapsedMs(true);
+
+        sleepTime = MS_PER_GAME_TICK - loopDurationMs;
+
+        if (sleepTime >= 0) {
+            Sleep(sleepTime);
+            OutputDebugStringW(L"SLEPT OK.");
+        }
+        else {
+            // Less than 60fps
+            OutputDebugStringW(L"sa lag frere.");
+        }
     }
 }
 

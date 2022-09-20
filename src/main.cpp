@@ -1,6 +1,7 @@
 #include <iostream>
 #include <windows.h>
 
+#include "NYTimer.h"
 #include "ConsoleSurvivorGame.h"
 
 using namespace std;

@@ -18,8 +18,6 @@ void Renderer::Render() {
     DisplayArena();
 
     WriteConsoleOutput(hOutput, (CHAR_INFO*)buffer, dwBufferSize, dwBufferCoord, &rcRegion);
-
-    Sleep(1000);
 }
 
 void Renderer::DisplayArena() {

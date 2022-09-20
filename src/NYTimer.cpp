@@ -39,5 +39,9 @@ unsigned long NYTimer::getElapsedMs(bool restart = false)
 	LONGLONG elapsedLong = timeNow.QuadPart - lastUpdateTime.QuadPart;
 
 	unsigned long elapsed = (unsigned long)((float)elapsedLong / (float)freq);
+
+	if (restart)
+		lastUpdateTime = timeNow;
+	
 	return elapsed;
 }

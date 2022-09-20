@@ -2,6 +2,7 @@
 /cmake-build-debug
 /.idea
 /out
+/x64
 
 # Prerequisites
 *.d
@@ -35,3 +36,7 @@
 *.exe
 *.out
 *.app
+ConsoleSurvivor.sln
+*.vcxproj
+ConsoleSurvivor.vcxproj.filters
+ConsoleSurvivor.vcxproj.user

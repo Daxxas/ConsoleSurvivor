@@ -6,4 +6,7 @@ class ConsoleSurvivorGame {
 		void launchGame();
 		void HideCaret(HANDLE);
         void PrepareWindowStyle(HANDLE);
+
+private:
+    void DisplayArena();
 };

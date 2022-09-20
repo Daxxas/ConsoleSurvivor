@@ -8,7 +8,7 @@
 
 class Player : Entity {
 public:
-    Player(Vector2 position, int maxHealth, int damage);
+    Player(Vector2 position, int maxHealth, int damage, float attacksPerSecond);
 
     void Damage(int damage);
     void SetPosition(Vector2 position) override;
@@ -18,6 +18,7 @@ private:
     int maxHealth;
     int health;
     int damage;
+    float attacksPerSecond;
 };
 
 

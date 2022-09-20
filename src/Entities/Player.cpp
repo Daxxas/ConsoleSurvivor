@@ -7,10 +7,11 @@
 #include "Entity.h"
 #include "Player.h"
 
-Player::Player(Vector2 position, int maxHealth, int damage) : Entity(position) {
+Player::Player(Vector2 position, int maxHealth, int damage, float attacksPerSecond) : Entity(position) {
     this->maxHealth = maxHealth;
     this->health = maxHealth;
     this->damage = damage;
+    this->attacksPerSecond = attacksPerSecond;
 }
 
 

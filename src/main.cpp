@@ -1,8 +1,9 @@
 #include <windows.h>
 #include <iostream>
 
-#include "NYTimer.h"
 #include "Vector2.h"
+#include "NYTimer.h"
+#include "InputHandler.h"
 #include "Entities/Entity.h"
 #include "Entities/Player.h"
 #include "ConsoleSurvivorGame.h"

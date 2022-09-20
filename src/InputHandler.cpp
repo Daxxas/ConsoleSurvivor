@@ -1,17 +1,20 @@
-//
-// Created by Jacques on 19/09/2022.
-//
-
 #include <windows.h>
+#include "Vector2.h"
 #include "InputHandler.h"
 
-Vector2 InputHandler::GetMovementDirection() {
+InputHandler::InputHandler() {
+}
 
-    short leftKey = GetAsyncKeyState('Q');
+Vector2* InputHandler::DetectMovementDirectionFromPlayer() {
+	// 0x5A : V - 0x51 : Q - 0x53 : S - 0x43 : D
+	bool isZPressed = IsVKeyPressed(0x5A);
+	bool isQPressed = IsVKeyPressed(0x51);
+	bool isSPressed = IsVKeyPressed(0x53);
+	bool isDPressed = IsVKeyPressed(0x43);
 
-    if(leftKey & 0x01) {
-        return Vector2(-1, 0);
-    }
+	return new Vector2(isDPressed - isQPressed, isZPressed - isSPressed);;
+}
 
-    return Vector2(0, 0);
+bool InputHandler::IsVKeyPressed(int vKey) {
+	return GetAsyncKeyState(vKey) & 1000000000000000;
 }

@@ -4,7 +4,6 @@ class GameManager {
 		GameManager();
         Entity * entities[maxEntities];
         Player * player;
+		InputHandler inputHandler;
 		void RunGameLoop();
-		void DetectLastInputFromPlayer();
-		bool IsVKeyPressed(int);
 };

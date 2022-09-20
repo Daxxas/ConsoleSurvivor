@@ -1,10 +1,16 @@
+
+
+
+
 class GameManager {
 	public:
         static const int maxEntities = 100;
-		GameManager();
         Entity * entities[maxEntities];
         Player * player;
-		InputHandler inputHandler;
-		void RunGameLoop();
+		InputHandler * inputHandler;
+		NYTimer * timer;
         int validEntityCount = 0;
+public:
+		GameManager();
+		void RunGameLoop();
 };

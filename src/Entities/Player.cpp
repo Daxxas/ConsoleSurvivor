@@ -4,11 +4,12 @@
 #include "Entity.h"
 #include "Player.h"
 
-Player::Player(Vector2 position, int maxHealth, int damage, float attacksPerSecond) : Entity(position) {
+Player::Player(Vector2 position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed) : Entity(position) {
     this->maxHealth = maxHealth;
     this->health = maxHealth;
     this->damage = damage;
     this->attacksPerSecond = attacksPerSecond;
+    this->moveSpeed = moveSpeed;
 
     spriteWidth = 3;
     spriteHeight = 2;
@@ -34,6 +35,10 @@ Player::Player(Vector2 position, int maxHealth, int damage, float attacksPerSeco
 
 void Player::Damage (int damage) {
 
+}
+
+void Player::Move(Vector2 direction) {
+	position = position.add(direction);
 }
 
 CHAR_INFO* Player::Display() {

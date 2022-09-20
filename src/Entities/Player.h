@@ -8,16 +8,18 @@
 
 class Player : public Entity {
 public:
-    Player(Vector2 position, int maxHealth, int damage, float attacksPerSecond);
+    Player(Vector2 position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed);
 
     void Damage(int damage);
     void SetPosition(Vector2 position) override;
+	void Move(Vector2 direction);
     Vector2 GetPosition() override;
     CHAR_INFO* Display() override;
 private:
     int maxHealth;
     int health;
     int damage;
+    float moveSpeed;
     float attacksPerSecond;
     CHAR_INFO* sprite;
 };

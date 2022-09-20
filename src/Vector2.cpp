@@ -13,3 +13,13 @@ Vector2 Vector2::add(Vector2 other)
 {
     return Vector2(this->x + other.x, this->y + other.y);
 }
+
+Vector2 Vector2::multiply(int multiplier)
+{
+    return Vector2(this->x * multiplier, this->y * multiplier);
+}
+
+Vector2 Vector2::multiply(int multX, int multY)
+{
+    return Vector2(this->x * multX, this->y * multY);
+}

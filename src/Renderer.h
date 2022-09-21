@@ -6,7 +6,7 @@
 
 class Renderer {
 public:
-    static const int DISPLAY_WIDTH = 140;
+    static const int DISPLAY_WIDTH = 300;
     static const int DISPLAY_HEIGHT = 50;
     void Render();
     Renderer(HANDLE&);
@@ -15,6 +15,6 @@ private:
     void CleanBuffer();
     CHAR_INFO buffer[DISPLAY_HEIGHT][DISPLAY_WIDTH];
     HANDLE hOutput;
-    void DisplayArena();
+    void DisplayArena(Vector2 cameraTopLeft, Vector2 cameraBottomRight);
     GameManager* gameManager;
 };

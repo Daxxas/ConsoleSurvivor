@@ -18,7 +18,7 @@ void Renderer::Render() {
     Vector2 cameraTopLeft = Vector2(cameraPosition.x - DISPLAY_WIDTH / 2, cameraPosition.y - DISPLAY_HEIGHT / 2);
     Vector2 cameraBottomRight = Vector2(cameraPosition.x + DISPLAY_WIDTH / 2, cameraPosition.y + DISPLAY_HEIGHT / 2);
 
-    DisplayArena();
+    DisplayArena(cameraTopLeft, cameraBottomRight);
 
     for(int i = 0 ; i < gameManager->validEntityCount; ++i) {
 
@@ -47,6 +47,20 @@ void Renderer::Render() {
         }
     }
 
+    for (int x = 0; x < DISPLAY_WIDTH; ++x) {
+        buffer[0][x].Char.AsciiChar = '-';
+        buffer[0][x].Attributes = 0x0002;
+        buffer[DISPLAY_HEIGHT-1][x].Char.AsciiChar = '-';
+        buffer[DISPLAY_HEIGHT-1][x].Attributes = 0x0002;
+
+    }
+    for (int y = 0; y < DISPLAY_HEIGHT; ++y) {
+        buffer[y][0].Char.AsciiChar = '|';
+        buffer[y][0].Attributes = 0x0002;
+        buffer[y][DISPLAY_WIDTH-1].Char.AsciiChar = '|';
+        buffer[y][DISPLAY_WIDTH-1].Attributes = 0x0002;
+    }
+
     WriteConsoleOutput(hOutput, (CHAR_INFO*)buffer, dwBufferSize, dwBufferCoord, &rcRegion);
     //std::cout << "x:" << gameManager->player->position.x << "- y:" << gameManager->player->position.y;
 }
@@ -64,12 +78,12 @@ void Renderer::DisplayArena(Vector2 cameraTopLeft, Vector2 cameraBottomRight) {
 
     // TODO : do the correct math to display the wall when near arena
 
-    for (int x = cameraTopLeft.x; x < DISPLAY_WIDTH; ++x) {
+    for (int x = 0; x < DISPLAY_WIDTH; ++x) {
         for (int y = 0; y < DISPLAY_HEIGHT; ++y) {
-            if(x == 0 || x == GameManager::ARENA_WIDTH - 1 || y == 0 || y == GameManager::ARENA_HEIGHT - 1) {
-                buffer[y][x].Char.AsciiChar = '#';
-                buffer[y][x].Attributes = 0x0F;
-            }
+//            if(cameraTopLeft.x +  x <= 0 || cameraBottomRight.x + x >= GameManager::ARENA_WIDTH - 1 || cameraBottomRight.y + y <= 0 || cameraBottomRight.y + y == GameManager::ARENA_HEIGHT - 1) {
+//                buffer[y][x].Char.AsciiChar = '#';
+//                buffer[y][x].Attributes = 0x0F;
+//            }
         }
     }
 }

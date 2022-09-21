@@ -40,7 +40,7 @@ void Player::Damage (int damage) {
 
 }
 
-void Player::Move(Vector2 direction) {
+void Player::Move(Vector2& direction) {
 	position = position.add(direction);
 }
 

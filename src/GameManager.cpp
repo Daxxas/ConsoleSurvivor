@@ -6,7 +6,7 @@ GameManager::GameManager() {
 	player = new Player(*playerSpawnPosition, 1, 1, 1, 1, inputHandler);
     AddEntity(player);
 
-    AddEntity(new BatEnemy(Vector2(20, 20)));
+    AddEntity(new BatEnemy(Vector2(20, 20), 1, 1, 1, 1));
 
     for (int i = 0; i < maxBullets; ++i) {
         bullets[i] = new Bullet(Vector2(0, 0), Vector2(0, 0), 1, 1);

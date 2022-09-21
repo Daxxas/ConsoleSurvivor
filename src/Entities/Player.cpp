@@ -33,7 +33,7 @@ Player::Player(Vector2& position, int maxHealth, int damage, float attacksPerSec
 void Player::Update() {
     Vector2* direction = this->inputHandler->DetectMovementDirectionFromPlayer();
 
-    if (timer.getElapsedMs(false) > baseMsBetweenMovements/GetMoveSpeed()) {
+    if (timer.getElapsedMs(false) > baseMsBetweenMovements/moveSpeed) {
         if (direction->x != 0 || direction->y != 0) {
             Move(*direction);
             this->timer.getElapsedMs(true);
@@ -46,5 +46,7 @@ void Player::Damage (int& damage) {
 }
 
 void Player::Move(Vector2& direction) {
-	position = position.add(direction);
+    Vector2 directionBoostedHorizontal = direction;
+    directionBoostedHorizontal.x *= Entity::horizontalSpeedBooster;
+	position = position.add(directionBoostedHorizontal);
 }

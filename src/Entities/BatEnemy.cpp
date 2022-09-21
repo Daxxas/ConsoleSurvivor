@@ -1,6 +1,13 @@
 #include "BatEnemy.h"
 
-BatEnemy::BatEnemy(Vector2& position) : Entity(position) {
+BatEnemy::BatEnemy(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed) : Entity(position) {
+
+    this->maxHealth = maxHealth;
+    this->health = maxHealth;
+    this->damage = damage;
+    this->attacksPerSecond = attacksPerSecond;
+    this->moveSpeed = moveSpeed;
+	
     spriteWidth = 3;
     spriteHeight = 1;
 
@@ -14,15 +21,23 @@ BatEnemy::BatEnemy(Vector2& position) : Entity(position) {
     sprite[1].Attributes = 0x0006;
     sprite[2].Attributes = 0x0006;
 
+    timer.start();
 }
 
 void BatEnemy::Update() {
-    Vector2 playerPosition = *GameManager::Instance().GetPlayerPosition();
-    Vector2 directionToFollow = playerPosition - this->position;
-    directionToFollow.setOffsetsTo1();
-	this->Move(directionToFollow);
+    if (timer.getElapsedMs(false) > baseMsBetweenMovements / moveSpeed) {
+        Vector2 playerPosition = *GameManager::Instance().GetPlayerPosition();
+        Vector2 directionToFollow = playerPosition - this->position;
+		
+        directionToFollow.normalize();
+        this->Move(directionToFollow);
+		
+        this->timer.getElapsedMs(true);
+    }
 }
 
 void BatEnemy::Move(Vector2& direction) {
-    position = position.add(direction);
+    Vector2 directionBoostedHorizontal = direction;
+    directionBoostedHorizontal.x *= Entity::horizontalSpeedBooster;
+    position = position.add(directionBoostedHorizontal);
 }

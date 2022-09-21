@@ -8,6 +8,8 @@ class Entity {
 public:
     Entity(Vector2& position);
 
+    static const int horizontalSpeedBooster = 2;
+		
     CHAR_INFO* Display();
     virtual void Update() = 0;
     virtual void Move(Vector2&) = 0;
@@ -17,4 +19,3 @@ public:
     int spriteHeight;
     CHAR_INFO* sprite;
 };
-

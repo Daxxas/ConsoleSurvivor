@@ -13,27 +13,13 @@ void ConsoleSurvivorGame::launchGame() {
 
     Renderer *renderer = new Renderer(hOutput);
 
-    this->timer.start();
     int sleepTime = 0;
     unsigned long loopDurationMs;
     bool gameIsRunning = true;
 	
     while(gameIsRunning) {
-        this->timer.getElapsedMs(true);
-
         GameManager::Instance().RunGameLoop();
         renderer->Render();
-
-        loopDurationMs = this->timer.getElapsedMs(true);
-
-        sleepTime = MS_PER_GAME_TICK - loopDurationMs;
-
-        if (sleepTime >= 0) {
-            Sleep(sleepTime);
-        }
-        else {
-            // Less than 60fps
-        }
     }
 }
 

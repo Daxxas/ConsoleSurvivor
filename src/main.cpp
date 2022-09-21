@@ -6,6 +6,7 @@
 #include "InputHandler.h"
 #include "Entities/Entity.h"
 #include "Entities/Player.h"
+#include "Entities/BatEnemy.h"
 #include "ConsoleSurvivorGame.h"
 #include "GameManager.h"
 #include "Renderer.h"

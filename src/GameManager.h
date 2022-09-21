@@ -1,7 +1,3 @@
-
-
-
-
 class GameManager {
 	public:
         static const int maxEntities = 100;

@@ -26,8 +26,3 @@ void BatEnemy::Update() {
 void BatEnemy::Move(Vector2& direction) {
     position = position.add(direction);
 }
-
-CHAR_INFO *BatEnemy::Display() {
-    return sprite;
-
-}

@@ -28,4 +28,5 @@ public:
 public:
     void RunGameLoop();
     void AddEntity(Entity * entity);
+	Vector2* GetPlayerPosition();
 };

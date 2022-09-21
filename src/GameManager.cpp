@@ -36,6 +36,11 @@ void GameManager::RunGameLoop() {
 	// manage shooting
 }
 
+Vector2* GameManager::GetPlayerPosition() {
+    Vector2* playerPosition = &player->GetPosition();
+	return playerPosition;
+}
+
 GameManager::~GameManager() = default;
 
 

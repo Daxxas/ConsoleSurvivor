@@ -14,10 +14,11 @@ Vector2::Vector2(int x, int y) {
     this->y = y;
 }
 
-void Vector2::normalize() {
-//    double magnitude = sqrt(x * x + y * y);
-//    x /= magnitude;
-//    y /= magnitude;
+void Vector2::setOffsetsTo1() {
+	if(x != 0)
+        x /= abs(x);
+	if(y != 0)
+        y /= abs(y);
 }
 
 Vector2 Vector2::add(Vector2 &other)

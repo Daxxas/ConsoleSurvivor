@@ -10,6 +10,7 @@ public:
 
     virtual CHAR_INFO* Display() = 0;
     virtual void Update() = 0;
+    virtual void Move(Vector2&) = 0;
     bool isActive = false;
     Vector2 position;
     int spriteWidth;

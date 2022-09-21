@@ -1,4 +1,3 @@
-
 #include "BatEnemy.h"
 
 BatEnemy::BatEnemy(Vector2& position) : Entity(position) {
@@ -18,7 +17,14 @@ BatEnemy::BatEnemy(Vector2& position) : Entity(position) {
 }
 
 void BatEnemy::Update() {
+    Vector2 playerPosition = *GameManager::Instance().GetPlayerPosition();
+    Vector2 directionToFollow = playerPosition - this->position;
+    directionToFollow.setOffsetsTo1();
+	this->Move(directionToFollow);
+}
 
+void BatEnemy::Move(Vector2& direction) {
+    position = position.add(direction);
 }
 
 CHAR_INFO *BatEnemy::Display() {

@@ -1,7 +1,3 @@
-//
-// Created by Jacques on 20/09/2022.
-//
-
 #ifndef CONSOLESURVIVOR_PLAYER_H
 #define CONSOLESURVIVOR_PLAYER_H
 
@@ -21,8 +17,9 @@ public:
 	void Move(Vector2& direction);
     CHAR_INFO* Display() override;
     void Update() override;
-    float GetMoveSpeed() { return moveSpeed;}
+    float& GetMoveSpeed() { return moveSpeed;}
+    Vector2& GetPosition() { return position; }
 };
 
 
-#endif //CONSOLESURVIVOR_PLAYER_H
+#endif

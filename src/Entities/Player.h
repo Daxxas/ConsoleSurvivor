@@ -14,7 +14,7 @@ private:
     float attacksPerSecond;
     NYTimer timer;
     InputHandler * inputHandler;
-    int baseMsBetweenMovements = 250;
+    int baseMsBetweenMovements = 150;
 public:
     Player(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed, InputHandler* inputHandler);
 

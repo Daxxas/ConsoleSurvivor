@@ -11,12 +11,20 @@ void Renderer::Render() {
     SMALL_RECT rcRegion = {0, 0, DISPLAY_WIDTH - 1, DISPLAY_HEIGHT - 1 };
     ReadConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,dwBufferCoord, &rcRegion);
 
-    DisplayArena();
+    CleanBuffer();
+
+    cameraPosition = *gameManager->GetPlayerPosition();
+
+    Vector2 cameraTopLeft = Vector2(cameraPosition.x - DISPLAY_WIDTH / 2, cameraPosition.y - DISPLAY_HEIGHT / 2);
+    Vector2 cameraBottomRight = Vector2(cameraPosition.x + DISPLAY_WIDTH / 2, cameraPosition.y + DISPLAY_HEIGHT / 2);
+
+//    DisplayArena();
 
     for(int i = 0 ; i < gameManager->validEntityCount; ++i) {
 
         if(gameManager->entities[i]->isActive) {
             CHAR_INFO* spriteToDisplay = gameManager->entities[i]->Display();
+            Vector2 entityPosition = gameManager->entities[i]->position;
 
             int yOffset = 0;
             int xOffset = 0;
@@ -26,16 +34,30 @@ void Renderer::Render() {
                     yOffset++;
                     xOffset = 0;
                 }
-//                buffer[gameManager->entities[i]->position.y+yOffset][gameManager->entities[i]->position.x+xOffset] = spriteToDisplay[j];
-                buffer[gameManager->entities[i]->position.y+yOffset][gameManager->entities[i]->position.x+xOffset] = spriteToDisplay[j];
+
+                Vector2 spritePosition = Vector2(entityPosition.x + xOffset, entityPosition.y + yOffset);
+
+                if(spritePosition.x >= cameraTopLeft.x && spritePosition.x <= cameraBottomRight.x && spritePosition.y >= cameraTopLeft.y && spritePosition.y <= cameraBottomRight.y) {
+                    int x = spritePosition.x - cameraTopLeft.x;
+                    int y = spritePosition.y - cameraTopLeft.y;
+                    buffer[y][x] = spriteToDisplay[j];
+                }
                 xOffset++;
             }
         }
-
     }
 
     WriteConsoleOutput(hOutput, (CHAR_INFO*)buffer, dwBufferSize, dwBufferCoord, &rcRegion);
     //std::cout << "x:" << gameManager->player->position.x << "- y:" << gameManager->player->position.y;
+}
+
+void Renderer::CleanBuffer() {
+    for(int i = 0; i < DISPLAY_HEIGHT; ++i) {
+        for(int j = 0; j < DISPLAY_WIDTH; ++j) {
+            buffer[i][j].Char.AsciiChar = ' ';
+            buffer[i][j].Attributes = 0;
+        }
+    }
 }
 
 void Renderer::DisplayArena() {

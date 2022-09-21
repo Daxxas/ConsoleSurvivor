@@ -20,8 +20,8 @@ private:
     ~GameManager();
 
 public:
-    static const int ARENA_WIDTH = 140;
-    static const int ARENA_HEIGHT = 50;
+    static const int ARENA_WIDTH = 300;
+    static const int ARENA_HEIGHT = 300;
     static const int xOffset = 2;
     static const int yOffset = 1;
     static const int maxEntities = 800;

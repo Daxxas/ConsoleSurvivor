@@ -18,7 +18,7 @@ void Renderer::Render() {
     Vector2 cameraTopLeft = Vector2(cameraPosition.x - DISPLAY_WIDTH / 2, cameraPosition.y - DISPLAY_HEIGHT / 2);
     Vector2 cameraBottomRight = Vector2(cameraPosition.x + DISPLAY_WIDTH / 2, cameraPosition.y + DISPLAY_HEIGHT / 2);
 
-    DisplayArena(cameraTopLeft, cameraBottomRight);
+    DisplayArena(cameraTopLeft);
 
     for(int i = 0 ; i < gameManager->validEntityCount; ++i) {
 
@@ -74,12 +74,16 @@ void Renderer::CleanBuffer() {
     }
 }
 
-void Renderer::DisplayArena(Vector2 cameraTopLeft, Vector2 cameraBottomRight) {
-
-    // TODO : do the correct math to display the wall when near arena
+void Renderer::DisplayArena(Vector2 cameraTopLeft) {
 
     for (int x = 0; x < DISPLAY_WIDTH; ++x) {
         for (int y = 0; y < DISPLAY_HEIGHT; ++y) {
+
+            if((cameraTopLeft.x + x) % 4 == 0 && (cameraTopLeft.y + y) % 4 == 0) {
+                buffer[y][x].Char.AsciiChar = '.';
+                buffer[y][x].Attributes = 0x0F;
+            }
+
             if(cameraTopLeft.x + x <= 0 || cameraTopLeft.x + x >= GameManager::ARENA_WIDTH-1 || cameraTopLeft.y + y <= 0 || cameraTopLeft.y + y >= GameManager::ARENA_HEIGHT-1) {
                 buffer[y][x].Char.AsciiChar = '#';
                 buffer[y][x].Attributes = 0x0F;

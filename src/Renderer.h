@@ -15,6 +15,6 @@ private:
     void CleanBuffer();
     CHAR_INFO buffer[DISPLAY_HEIGHT][DISPLAY_WIDTH];
     HANDLE hOutput;
-    void DisplayArena(Vector2 cameraTopLeft, Vector2 cameraBottomRight);
+    void DisplayArena(Vector2 cameraTopLeft);
     GameManager* gameManager;
 };

@@ -2,7 +2,7 @@
 
 GameManager::GameManager() {
 	inputHandler = new InputHandler();
-	Vector2* playerSpawnPosition = new Vector2(10, 10);
+	Vector2* playerSpawnPosition = new Vector2(ARENA_WIDTH/2, ARENA_HEIGHT/2);
 	player = new Player(*playerSpawnPosition, 1, 1, 1, 1, inputHandler);
     AddEntity(player);
     entities[validEntityCount-1]->isActive = true;

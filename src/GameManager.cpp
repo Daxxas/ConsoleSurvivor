@@ -14,11 +14,15 @@ GameManager::GameManager() {
     player->isActive = true;
     entities[0] = player;
     validEntityCount++;
-	timer->start();
+
+    entities[1] = new BatEnemy(Vector2(20, 20));
+    entities[1]->isActive = true;
+    validEntityCount++;
+	timer.start();
 }
 
 void GameManager::RunGameLoop() {
-	Vector2* direction = this->inputHandler.DetectMovementDirectionFromPlayer();
+	Vector2* direction = this->inputHandler->DetectMovementDirectionFromPlayer();
 
 
     for (int i = 0; i < validEntityCount; ++i) {

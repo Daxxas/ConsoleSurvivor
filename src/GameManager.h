@@ -8,7 +8,7 @@ class GameManager {
         Entity * entities[maxEntities];
         Player * player;
 		InputHandler * inputHandler;
-		NYTimer * timer;
+		NYTimer timer;
         int validEntityCount = 0;
 public:
     void RunGameLoop();

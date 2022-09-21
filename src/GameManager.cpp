@@ -7,7 +7,8 @@ GameManager::GameManager() {
     AddEntity(player);
     entities[validEntityCount-1]->isActive = true;
 
-    AddEntity(new BatEnemy(Vector2(20, 20)));
+
+    AddEntity(new BatEnemy(Vector2(20, 20), 1, 1, 1, 1));
     entities[validEntityCount-1]->isActive = true;
 }
 

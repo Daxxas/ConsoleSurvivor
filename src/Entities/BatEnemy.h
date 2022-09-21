@@ -5,7 +5,15 @@
 
 class BatEnemy : public Entity {
 public:
-    BatEnemy(Vector2& position);
+    int maxHealth;
+    int health;
+    int damage;
+    float moveSpeed;
+    float attacksPerSecond;
+    NYTimer timer;
+    int baseMsBetweenMovements = 250;
+public:
+    BatEnemy(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed);
     void Update() override;
     void Move(Vector2&) override;
 

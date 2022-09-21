@@ -14,11 +14,19 @@ Vector2::Vector2(int x, int y) {
     this->y = y;
 }
 
-void Vector2::setOffsetsTo1() {
-	if(x != 0)
-        x /= abs(x);
-	if(y != 0)
-        y /= abs(y);
+void Vector2::normalize() {
+    int newX, newY;
+    // normalize vector
+    double mag = sqrt(x * x + y * y);
+    if (mag == 0) {
+        newX = newY = 0;
+    }
+    else {
+	newX = floor((x / mag) + 0.5);
+    newY = floor((y / mag) + 0.5);
+    }
+    x = newX;
+	y = newY;
 }
 
 Vector2 Vector2::add(Vector2 &other)

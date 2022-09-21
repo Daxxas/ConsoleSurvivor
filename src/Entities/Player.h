@@ -3,6 +3,10 @@
 
 #include "../NYTimer.h"
 #include "../InputHandler.h"
+#include "../GameManager.h"
+#include <iostream>
+#include <list>
+#include "Bullet.h"
 #include "Entity.h"
 
 class Player : public Entity {
@@ -11,18 +15,29 @@ private:
     int health;
     int damage;
     float moveSpeed;
-    float attacksPerSecond;
-    NYTimer timer;
+    float shootSpeed;
+    NYTimer moveTimer;
+    NYTimer shootTimer;
     InputHandler * inputHandler;
     int baseMsBetweenMovements = 150;
+    int baseMsBetweenShoots = 500;
+    void Shoot();
 public:
     Player(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed, InputHandler* inputHandler);
-
     void Damage(int& damage);
 	void Move(Vector2& direction);
     void Update() override;
     float& GetMoveSpeed() { return moveSpeed;}
+    float& GetShootSpeed() { return shootSpeed;}
     Vector2& GetPosition() { return position; }
+
+// Bullet management
+public:
+    std::list<Bullet*> bullets;
+    Bullet* GetBullet();
+    void ReturnBullet(Bullet* bullet);
+private:
+    int lastBulletIndex = 0;
 };
 
 

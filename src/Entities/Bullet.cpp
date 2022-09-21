@@ -16,3 +16,9 @@ void Bullet::Update() {
 void Bullet::Move(Vector2& direction) {
 
 }
+
+void Bullet::Reset() {
+    this->position = Vector2(0, 0);
+    this->direction = Vector2(0, 0);
+    isActive = false;
+};

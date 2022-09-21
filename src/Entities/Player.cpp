@@ -4,7 +4,7 @@ Player::Player(Vector2& position, int maxHealth, int damage, float attacksPerSec
     this->maxHealth = maxHealth;
     this->health = maxHealth;
     this->damage = damage;
-    this->attacksPerSecond = attacksPerSecond;
+    this->shootSpeed = attacksPerSecond;
     this->moveSpeed = moveSpeed;
     this->inputHandler = inputHandler;
 
@@ -27,18 +27,47 @@ Player::Player(Vector2& position, int maxHealth, int damage, float attacksPerSec
     sprite[4].Attributes = 0x0003;
     sprite[5].Attributes = 0x0003;
 
-    timer.start();
+    moveTimer.start();
+    shootTimer.start();
 }
 
 void Player::Update() {
     Vector2* direction = this->inputHandler->DetectMovementDirectionFromPlayer();
 
-    if (timer.getElapsedMs(false) > baseMsBetweenMovements/GetMoveSpeed()) {
+    if (moveTimer.getElapsedMs(false) > baseMsBetweenMovements / GetMoveSpeed()) {
         if (direction->x != 0 || direction->y != 0) {
             Move(*direction);
-            this->timer.getElapsedMs(true);
+            this->moveTimer.getElapsedMs(true);
         }
     }
+
+    if(shootTimer.getElapsedMs(false) > baseMsBetweenShoots / GetShootSpeed()) {
+        Shoot();
+        this->moveTimer.getElapsedMs(true);
+    }
+}
+
+void Player::Shoot() {
+
+}
+
+Bullet* Player::GetBullet() {
+    if(bullets.empty()) {
+        Bullet* bullet = new Bullet(position, Vector2(0, 0), 0, 0);
+        GameManager::Instance().AddEntity(bullet);
+
+        return bullet;
+    }
+    else {
+        Bullet* bullet = bullets.front();
+        bullets.pop_front();
+        return bullet;
+    }
+}
+
+void Player::ReturnBullet(Bullet* bullet) {
+    bullet->Reset();
+    bullets.push_back(bullet);
 }
 
 void Player::Damage (int& damage) {

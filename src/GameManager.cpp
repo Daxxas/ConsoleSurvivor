@@ -5,18 +5,19 @@ GameManager::GameManager() {
 	Vector2* playerSpawnPosition = new Vector2(10, 10);
 	player = new Player(*playerSpawnPosition, 1, 1, 1, 1, inputHandler);
     AddEntity(player);
+    entities[validEntityCount-1]->isActive = true;
 
     AddEntity(new BatEnemy(Vector2(20, 20)));
-
-    for (int i = 0; i < maxBullets; ++i) {
-        bullets[i] = new Bullet(Vector2(0, 0), Vector2(0, 0), 1, 1);
-    }
+    entities[validEntityCount-1]->isActive = true;
 }
 
 void GameManager::AddEntity(Entity *entity) {
     entities[validEntityCount] = entity;
-    entities[validEntityCount]->isActive = true;
     validEntityCount++;
+}
+
+void GameManager::SetActiveLastEntity(bool val) {
+    entities[validEntityCount-1]->isActive = val;
 }
 
 void GameManager::RunGameLoop() {

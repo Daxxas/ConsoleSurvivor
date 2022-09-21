@@ -1,4 +1,3 @@
-
 #include "BatEnemy.h"
 
 BatEnemy::BatEnemy(Vector2& position) : Entity(position) {
@@ -19,8 +18,4 @@ BatEnemy::BatEnemy(Vector2& position) : Entity(position) {
 
 void BatEnemy::Update() {
 
-}
-
-CHAR_INFO *BatEnemy::Display() {
-    return sprite;
 }

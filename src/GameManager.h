@@ -8,6 +8,7 @@ class GameManager {
         int validEntityCount = 0;
 public:
     void RunGameLoop();
+    void AddEntity(Entity * entity);
 
 //Singleton pattern
 public:

@@ -11,14 +11,16 @@
 GameManager::GameManager() {
 	inputHandler = new InputHandler();
 	player = new Player(Vector2(10, 10), 1, 1, 1, 1);
-    player->isActive = true;
-    entities[0] = player;
-    validEntityCount++;
+    AddEntity(player);
 
-    entities[1] = new BatEnemy(Vector2(20, 20));
-    entities[1]->isActive = true;
-    validEntityCount++;
+    AddEntity(new BatEnemy(Vector2(20, 20)));
 	timer.start();
+}
+
+void GameManager::AddEntity(Entity *entity) {
+    entities[validEntityCount] = entity;
+    entities[validEntityCount]->isActive = true;
+    validEntityCount++;
 }
 
 void GameManager::RunGameLoop() {

@@ -43,7 +43,7 @@ void Player::Update() {
 
     if(shootTimer.getElapsedMs(false) > baseMsBetweenShoots / GetShootSpeed()) {
         Shoot();
-        this->moveTimer.getElapsedMs(true);
+        this->shootTimer.getElapsedMs(true);
     }
 }
 

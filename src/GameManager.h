@@ -1,3 +1,11 @@
+#pragma once
+
+#include "NYTimer.h"
+#include "Vector2.h"
+#include "InputHandler.h"
+#include "Entities/Player.h"
+#include "Entities/BatEnemy.h"
+
 class GameManager {
 //Singleton pattern
 public:

@@ -1,5 +1,3 @@
-#include <windows.h>
-#include "Vector2.h"
 #include "InputHandler.h"
 
 InputHandler::InputHandler() {

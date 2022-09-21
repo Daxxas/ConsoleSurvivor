@@ -1,16 +1,4 @@
-#include <windows.h>
-#include <stdio.h>
-#include <string>
-#include "NYTimer.h"
-#include "Vector2.h"
-#include "InputHandler.h"
-#include "Entities/Entity.h"
-#include "Entities/Player.h"
-#include "Entities/BatEnemy.h"
 #include "ConsoleSurvivorGame.h"
-#include <WinUser.h>
-#include "GameManager.h"
-#include "Renderer.h"
 
 using namespace std;
 

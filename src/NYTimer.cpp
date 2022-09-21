@@ -1,5 +1,3 @@
-#include <windows.h>
-
 #include "NYTimer.h"
 
 NYTimer::NYTimer()

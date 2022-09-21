@@ -1,3 +1,9 @@
+#pragma once
+
+#include <windows.h>
+#include <string>
+#include "../Vector2.h"
+
 class Entity {
 public:
     Entity(Vector2& position);

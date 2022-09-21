@@ -77,7 +77,25 @@ void Player::Damage (int& damage) {
 }
 
 void Player::Move(Vector2& direction) {
+    if (checkIfMoveIsAllowed(direction)) {
     Vector2 directionBoostedHorizontal = direction;
     directionBoostedHorizontal.x *= Entity::horizontalSpeedBooster;
 	position = position.add(directionBoostedHorizontal);
+    }
+}
+
+bool Player::checkIfMoveIsAllowed(Vector2& direction) {
+	// Checks if x is out of bounds
+    if (position.x + direction.x < (0 + GameManager::xOffset)
+        || position.x + direction.x > GameManager::ARENA_WIDTH - 4) {
+        return false;
+    }
+
+    // Checks if y is out of bounds
+    if (position.y + direction.y < (0 + GameManager::yOffset) 
+        || position.y + direction.y > GameManager::ARENA_HEIGHT - 3) {
+        return false;
+    }
+	
+    return true;
 }

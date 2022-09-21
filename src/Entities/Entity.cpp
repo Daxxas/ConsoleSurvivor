@@ -3,5 +3,5 @@
 #include "../Vector2.h"
 #include "Entity.h"
 
-Entity::Entity(Vector2 position) : position(position) {
+Entity::Entity(Vector2& position) : position(position) {
 }

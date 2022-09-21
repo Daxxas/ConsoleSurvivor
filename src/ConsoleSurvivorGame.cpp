@@ -51,7 +51,7 @@ void ConsoleSurvivorGame::launchGame() {
 
 
 
-void ConsoleSurvivorGame::HideCaret(HANDLE hOutput) {
+void ConsoleSurvivorGame::HideCaret(HANDLE& hOutput) {
     // Hide Caret
     CONSOLE_CURSOR_INFO cursorInfo;
     GetConsoleCursorInfo(hOutput, &cursorInfo);
@@ -59,7 +59,7 @@ void ConsoleSurvivorGame::HideCaret(HANDLE hOutput) {
     SetConsoleCursorInfo(hOutput, &cursorInfo);
 }
 
-void ConsoleSurvivorGame::PrepareWindowStyle(HANDLE hOutput) {
+void ConsoleSurvivorGame::PrepareWindowStyle(HANDLE& hOutput) {
     HWND hwnd_console = GetConsoleWindow();
     ShowWindow(hwnd_console, SW_MAXIMIZE);
 

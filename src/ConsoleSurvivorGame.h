@@ -5,8 +5,8 @@ class ConsoleSurvivorGame {
 		NYTimer timer;
 		ConsoleSurvivorGame();
 		void launchGame();
-		void HideCaret(HANDLE);
-        void PrepareWindowStyle(HANDLE);
+		void HideCaret(HANDLE&);
+        void PrepareWindowStyle(HANDLE&);
 	private:
 		void DisplayArena();
 };

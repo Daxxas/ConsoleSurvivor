@@ -3,7 +3,7 @@
 #include "Entity.h"
 #include "BatEnemy.h"
 
-BatEnemy::BatEnemy(Vector2 position) : Entity(position) {
+BatEnemy::BatEnemy(Vector2& position) : Entity(position) {
     spriteWidth = 3;
     spriteHeight = 1;
 

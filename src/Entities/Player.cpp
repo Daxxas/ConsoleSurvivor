@@ -4,7 +4,7 @@
 #include "Entity.h"
 #include "Player.h"
 
-Player::Player(Vector2 position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed) : Entity(position) {
+Player::Player(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed) : Entity(position) {
     this->maxHealth = maxHealth;
     this->health = maxHealth;
     this->damage = damage;
@@ -36,7 +36,7 @@ void Player::Update() {
 
 }
 
-void Player::Damage (int damage) {
+void Player::Damage (int& damage) {
 
 }
 

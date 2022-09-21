@@ -7,7 +7,7 @@
 #include "GameManager.h"
 #include "Renderer.h"
 
-Renderer::Renderer(HANDLE hOutput) {
+Renderer::Renderer(HANDLE& hOutput) {
     this->hOutput = hOutput;
     gameManager = &GameManager::Instance();
 }

@@ -1,6 +1,6 @@
 class Entity {
 public:
-    Entity(Vector2 position);
+    Entity(Vector2& position);
 
     virtual CHAR_INFO* Display() = 0;
     virtual void Update() = 0;

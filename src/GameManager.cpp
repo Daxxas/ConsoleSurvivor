@@ -10,7 +10,8 @@
 
 GameManager::GameManager() {
 	inputHandler = new InputHandler();
-	player = new Player(Vector2(10, 10), 1, 1, 1, 1);
+	Vector2* playerSpawnPosition = new Vector2(10, 10);
+	player = new Player(*playerSpawnPosition, 1, 1, 1, 1);
     AddEntity(player);
 
     AddEntity(new BatEnemy(Vector2(20, 20)));

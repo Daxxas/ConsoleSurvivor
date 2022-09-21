@@ -5,8 +5,8 @@
 #include "InputHandler.h"
 #include "Entities/Entity.h"
 #include "Entities/Player.h"
-#include "GameManager.h"
 #include "Entities/BatEnemy.h"
+#include "GameManager.h"
 
 GameManager::GameManager() {
 	inputHandler = new InputHandler();

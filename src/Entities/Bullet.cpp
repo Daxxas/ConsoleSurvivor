@@ -12,3 +12,7 @@ Bullet::Bullet(Vector2& position, Vector2& direction, int damage, float speed) :
 void Bullet::Update() {
 
 }
+
+void Bullet::Move(Vector2& direction) {
+
+}

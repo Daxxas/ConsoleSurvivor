@@ -9,6 +9,7 @@ class GameManager {
         int baseMsBetweenPlayerMovements = 250;
 public:
     void RunGameLoop();
+    void AddEntity(Entity * entity);
 
 //Singleton pattern
 public:

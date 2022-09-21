@@ -6,6 +6,7 @@ class GameManager {
 		InputHandler * inputHandler;
 		NYTimer timer;
         int validEntityCount = 0;
+        int baseMsBetweenPlayerMovements = 250;
 public:
     void RunGameLoop();
 

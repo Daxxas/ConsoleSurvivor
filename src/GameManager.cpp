@@ -24,14 +24,18 @@ GameManager::GameManager() {
 void GameManager::RunGameLoop() {
 	Vector2* direction = this->inputHandler->DetectMovementDirectionFromPlayer();
 
-
     for (int i = 0; i < validEntityCount; ++i) {
         if(entities[i]->isActive) {
             entities[i]->Update();
         }
     }
 
-	player->position = player->position.add(*direction); // multiplier par speed
+    if (this->timer.getElapsedMs(false) > baseMsBetweenPlayerMovements/player->GetMoveSpeed()) {
+        if (direction->x != 0 || direction->y != 0) {
+            player->Move(*direction);
+            this->timer.getElapsedMs(true);
+        }
+    }
 	// manage player direction
 	// manage entities movement
 	// manage shooting

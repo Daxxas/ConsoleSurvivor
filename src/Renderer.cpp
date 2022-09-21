@@ -80,10 +80,10 @@ void Renderer::DisplayArena(Vector2 cameraTopLeft, Vector2 cameraBottomRight) {
 
     for (int x = 0; x < DISPLAY_WIDTH; ++x) {
         for (int y = 0; y < DISPLAY_HEIGHT; ++y) {
-//            if(cameraTopLeft.x +  x <= 0 || cameraBottomRight.x + x >= GameManager::ARENA_WIDTH - 1 || cameraBottomRight.y + y <= 0 || cameraBottomRight.y + y == GameManager::ARENA_HEIGHT - 1) {
-//                buffer[y][x].Char.AsciiChar = '#';
-//                buffer[y][x].Attributes = 0x0F;
-//            }
+            if(cameraTopLeft.x + x <= 0 || cameraTopLeft.x + x >= GameManager::ARENA_WIDTH-1 || cameraTopLeft.y + y <= 0 || cameraTopLeft.y + y >= GameManager::ARENA_HEIGHT-1) {
+                buffer[y][x].Char.AsciiChar = '#';
+                buffer[y][x].Attributes = 0x0F;
+            }
         }
     }
 }

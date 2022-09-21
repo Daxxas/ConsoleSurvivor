@@ -8,7 +8,7 @@ class Entity {
 public:
     Entity(Vector2& position);
 
-    virtual CHAR_INFO* Display() = 0;
+    CHAR_INFO* Display();
     virtual void Update() = 0;
     virtual void Move(Vector2&) = 0;
     bool isActive = false;

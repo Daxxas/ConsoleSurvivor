@@ -29,4 +29,5 @@ void BatEnemy::Move(Vector2& direction) {
 
 CHAR_INFO *BatEnemy::Display() {
     return sprite;
+
 }

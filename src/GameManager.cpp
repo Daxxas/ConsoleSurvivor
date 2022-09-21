@@ -1,11 +1,3 @@
-#include <windows.h>
-
-#include "NYTimer.h"
-#include "Vector2.h"
-#include "InputHandler.h"
-#include "Entities/Entity.h"
-#include "Entities/Player.h"
-#include "Entities/BatEnemy.h"
 #include "GameManager.h"
 
 GameManager::GameManager() {

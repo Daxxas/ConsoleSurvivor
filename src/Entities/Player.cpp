@@ -1,7 +1,3 @@
-#include <windows.h>
-#include <string>
-#include "../Vector2.h"
-#include "Entity.h"
 #include "Player.h"
 
 Player::Player(Vector2 position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed) : Entity(position) {

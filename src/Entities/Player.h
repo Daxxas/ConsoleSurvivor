@@ -5,6 +5,7 @@
 #ifndef CONSOLESURVIVOR_PLAYER_H
 #define CONSOLESURVIVOR_PLAYER_H
 
+#include "Entity.h"
 
 class Player : public Entity {
 private:

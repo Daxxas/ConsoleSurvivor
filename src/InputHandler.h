@@ -1,3 +1,7 @@
+#pragma once
+#include <windows.h>
+#include "Vector2.h"
+
 class InputHandler {
 public:
     InputHandler();

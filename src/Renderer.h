@@ -1,3 +1,9 @@
+#pragma once
+#include "NYTimer.h"
+#include "InputHandler.h"
+#include "Entities/Player.h"
+#include "GameManager.h"
+
 class Renderer {
 public:
     static const int DISPLAY_WIDTH = 140;

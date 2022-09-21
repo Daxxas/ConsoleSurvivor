@@ -1,10 +1,3 @@
-#include <windows.h>
-#include "Vector2.h"
-#include "NYTimer.h"
-#include "InputHandler.h"
-#include "Entities/Entity.h"
-#include "Entities/Player.h"
-#include "GameManager.h"
 #include "Renderer.h"
 
 Renderer::Renderer(HANDLE hOutput) {

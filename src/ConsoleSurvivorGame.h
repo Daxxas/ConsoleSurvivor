@@ -1,3 +1,10 @@
+#pragma once
+
+#include <windows.h>
+#include <string>
+#include "NYTimer.h"
+#include "GameManager.h"
+#include "Renderer.h"
 class ConsoleSurvivorGame {
 	public:
 		static const int TARGET_FPS = 60;

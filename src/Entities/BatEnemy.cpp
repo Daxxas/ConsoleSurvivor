@@ -1,6 +1,4 @@
-#include <windows.h>
-#include "../Vector2.h"
-#include "Entity.h"
+
 #include "BatEnemy.h"
 
 BatEnemy::BatEnemy(Vector2 position) : Entity(position) {

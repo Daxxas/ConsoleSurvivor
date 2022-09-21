@@ -1,3 +1,8 @@
+#pragma once
+
+#ifndef CONSOLESURVIVOR_VECTOR2_H
+#define CONSOLESURVIVOR_VECTOR2_H
+
 struct Vector2 {
 public:
     Vector2(int x, int y);
@@ -12,3 +17,4 @@ public:
     int x;
     int y;
 };
+#endif

@@ -11,6 +11,16 @@ class GameManager {
 		NYTimer * timer;
         int validEntityCount = 0;
 public:
-		GameManager();
-		void RunGameLoop();
+    void RunGameLoop();
+
+//Singleton pattern
+public:
+    static GameManager& Instance() {
+        static GameManager S;
+        return S;
+    }
+
+private:
+    GameManager();
+    ~GameManager();
 };

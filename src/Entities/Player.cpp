@@ -32,6 +32,9 @@ Player::Player(Vector2 position, int maxHealth, int damage, float attacksPerSeco
 
 }
 
+void Player::Update() {
+
+}
 
 void Player::Damage (int damage) {
 
@@ -45,10 +48,3 @@ CHAR_INFO* Player::Display() {
     return sprite;
 }
 
-Vector2 Player::GetPosition() {
-    return Vector2(0, 0);
-}
-
-void Player::SetPosition(Vector2 position) {
-
-}

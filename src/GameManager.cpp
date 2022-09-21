@@ -6,6 +6,7 @@
 #include "Entities/Entity.h"
 #include "Entities/Player.h"
 #include "GameManager.h"
+#include "Entities/BatEnemy.h"
 
 GameManager::GameManager() {
 	inputHandler = new InputHandler();
@@ -17,15 +18,22 @@ GameManager::GameManager() {
 }
 
 void GameManager::RunGameLoop() {
-	Vector2* direction = this->inputHandler->DetectMovementDirectionFromPlayer();
-	
-	// todo avec le timer empêcher déplacement
-	player->Move(*direction);
+	Vector2* direction = this->inputHandler.DetectMovementDirectionFromPlayer();
 
+
+    for (int i = 0; i < validEntityCount; ++i) {
+        if(entities[i]->isActive) {
+            entities[i]->Update();
+        }
+    }
+
+	player->position = player->position.add(*direction); // multiplier par speed
 	// manage player direction
 	// manage entities movement
 	// manage shooting
 }
+
+GameManager::~GameManager() = default;
 
 
 

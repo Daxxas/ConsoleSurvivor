@@ -7,9 +7,9 @@
 #include "GameManager.h"
 #include "Renderer.h"
 
-Renderer::Renderer(HANDLE hOutput, GameManager *gameManager) {
+Renderer::Renderer(HANDLE hOutput) {
     this->hOutput = hOutput;
-    this->gameManager = gameManager;
+    gameManager = &GameManager::Instance();
 }
 
 void Renderer::Render() {
@@ -57,7 +57,7 @@ void Renderer::DisplayArena() {
 
     for (int i = 1; i < DISPLAY_HEIGHT - 1; ++i) {
         for (int j = 1; j < DISPLAY_WIDTH - 1; ++j) {
-            buffer[i][j].Char.AsciiChar = '.';
+            buffer[i][j].Char.AsciiChar = ' ';
 
             buffer[i][j].Attributes = 0x0005;
         }

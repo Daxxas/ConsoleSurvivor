@@ -26,6 +26,7 @@ public:
     Player(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed, InputHandler* inputHandler);
     void Damage(int& damage);
 	void Move(Vector2& direction);
+    bool checkIfMoveIsAllowed(Vector2& direction);
     void Update() override;
     float& GetMoveSpeed() { return moveSpeed;}
     float& GetShootSpeed() { return shootSpeed;}

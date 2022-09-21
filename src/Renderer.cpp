@@ -35,6 +35,7 @@ void Renderer::Render() {
     }
 
     WriteConsoleOutput(hOutput, (CHAR_INFO*)buffer, dwBufferSize, dwBufferCoord, &rcRegion);
+    //std::cout << "x:" << gameManager->player->position.x << "- y:" << gameManager->player->position.y;
 }
 
 void Renderer::DisplayArena() {

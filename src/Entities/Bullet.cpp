@@ -7,6 +7,13 @@
 Bullet::Bullet(Vector2& position, Vector2& direction, int damage, float speed) : Entity(position), direction(direction) {
     this->damage = damage;
     this->speed = speed;
+
+    spriteWidth = 1;
+    spriteHeight = 1;
+
+    sprite = new CHAR_INFO[spriteWidth * spriteHeight];
+    sprite[0].Char.AsciiChar = '*';
+    sprite[0].Attributes = 0x0006;
 }
 
 void Bullet::Update() {

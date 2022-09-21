@@ -48,7 +48,9 @@ void Player::Update() {
 }
 
 void Player::Shoot() {
-
+    Bullet* bullet = GetBullet();
+    bullet->direction = Vector2(0, -1);
+    bullet->isActive = true;
 }
 
 Bullet* Player::GetBullet() {

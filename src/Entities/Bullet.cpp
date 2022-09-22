@@ -36,8 +36,8 @@ void Bullet::Update() {
         }
     }
 
-	if (position.x < 0 
-        || position.x > GameManager::Instance()->ARENA_WIDTH 
+	if (position.x < 1 
+        || position.x > GameManager::Instance()->ARENA_WIDTH-1 
         || position.y < 0 
         || position.y > GameManager::Instance()->ARENA_HEIGHT) {
 		isActive = false;

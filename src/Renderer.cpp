@@ -12,12 +12,12 @@ Renderer::Renderer(HANDLE& hOutput) {
 
             if(randval == 0) {
 
-                groundDeco[y][x]->Char.AsciiChar = '.';
+                groundDeco[y][x]->Char.UnicodeChar = '.';
                 groundDeco[y][x]->Attributes = 0x0F;
             }
             else {
 
-                groundDeco[y][x]->Char.AsciiChar = ' ';
+                groundDeco[y][x]->Char.UnicodeChar = ' ';
                 groundDeco[y][x]->Attributes = 0;
             }
 
@@ -67,29 +67,7 @@ void Renderer::Render() {
         }
     }
 
-    for (int x = 0; x < DISPLAY_WIDTH; ++x) {
-        buffer[0][x].Char.AsciiChar = '-';
-        buffer[0][x].Attributes = 0x0002;
-        buffer[DISPLAY_HEIGHT-1][x].Char.AsciiChar = '-';
-        buffer[DISPLAY_HEIGHT-1][x].Attributes = 0x0002;
-
-    }
-    for (int y = 0; y < DISPLAY_HEIGHT; ++y) {
-        buffer[y][0].Char.AsciiChar = '|';
-        buffer[y][0].Attributes = 0x0002;
-        buffer[y][DISPLAY_WIDTH-1].Char.AsciiChar = '|';
-        buffer[y][DISPLAY_WIDTH-1].Attributes = 0x0002;
-    }
-
-    std::string playerpos = "position: x: ";
-    playerpos += std::to_string(gameManager->GetPlayerPosition()->x);
-    playerpos += " y: ";
-    playerpos += std::to_string(gameManager->GetPlayerPosition()->y);
-
-    for (int i = 0; i < playerpos.length(); ++i) {
-        buffer[DISPLAY_HEIGHT-1][i].Char.AsciiChar = playerpos[i];
-        buffer[DISPLAY_HEIGHT-1][i].Attributes = 0x0002;
-    }
+    DrawUI();
 
     WriteConsoleOutput(hOutput, (CHAR_INFO*)buffer, dwBufferSize, dwBufferCoord, &rcRegion);
     //std::cout << "x:" << gameManager->player->position.x << "- y:" << gameManager->player->position.y;
@@ -98,9 +76,38 @@ void Renderer::Render() {
 void Renderer::CleanBuffer() {
     for(int i = 0; i < DISPLAY_HEIGHT; ++i) {
         for(int j = 0; j < DISPLAY_WIDTH; ++j) {
-            buffer[i][j].Char.AsciiChar = ' ';
-            buffer[i][j].Attributes = 0;
+            buffer[i][j].Char.UnicodeChar = 0x0;
+            buffer[i][j].Attributes = 0x0;
         }
+    }
+}
+
+void Renderer::DrawUI() {
+
+    // Borders
+    for (int x = 0; x < DISPLAY_WIDTH; ++x) {
+        buffer[0][x].Char.UnicodeChar = 0x2445;
+        buffer[0][x].Attributes = FOREGROUND_GREEN;
+        buffer[DISPLAY_HEIGHT-1][x].Char.UnicodeChar = 0x2445;
+        buffer[DISPLAY_HEIGHT-1][x].Attributes = FOREGROUND_GREEN;
+    }
+
+    for (int y = 0; y < DISPLAY_HEIGHT; ++y) {
+        buffer[y][0].Char.UnicodeChar = 0x2580;
+        buffer[y][0].Attributes = FOREGROUND_GREEN;
+        buffer[y][DISPLAY_WIDTH-1].Char.UnicodeChar = 0x2580;
+        buffer[y][DISPLAY_WIDTH-1].Attributes = FOREGROUND_GREEN;
+    }
+
+    // Player position
+    std::string playerpos = "position: x: ";
+    playerpos += std::to_string(gameManager->GetPlayerPosition()->x);
+    playerpos += " y: ";
+    playerpos += std::to_string(gameManager->GetPlayerPosition()->y);
+
+    for (int i = 0; i < playerpos.length(); ++i) {
+        buffer[DISPLAY_HEIGHT-1][i].Char.UnicodeChar = playerpos[i];
+        buffer[DISPLAY_HEIGHT-1][i].Attributes = 0x0002;
     }
 }
 
@@ -112,7 +119,7 @@ void Renderer::DisplayArena(Vector2 cameraTopLeft) {
             buffer[y][x] = *groundDeco[cameraTopLeft.y + y][cameraTopLeft.x + x];
 
             if(cameraTopLeft.x + x <= 0 || cameraTopLeft.x + x >= GameManager::ARENA_WIDTH-1 || cameraTopLeft.y + y <= 0 || cameraTopLeft.y + y >= GameManager::ARENA_HEIGHT-1) {
-                buffer[y][x].Char.AsciiChar = '#';
+                buffer[y][x].Char.UnicodeChar = '#';
                 buffer[y][x].Attributes = 0x0F;
             }
         }

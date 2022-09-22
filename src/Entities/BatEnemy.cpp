@@ -13,9 +13,9 @@ BatEnemy::BatEnemy(Vector2& position, int maxHealth, int damage, float attacksPe
 
     sprite = new CHAR_INFO[spriteWidth * spriteHeight];
     memset(sprite, 0, sizeof(CHAR_INFO) * spriteWidth * spriteHeight);
-    sprite[0].Char.AsciiChar = '>';
-    sprite[1].Char.AsciiChar = 'o';
-    sprite[2].Char.AsciiChar = '<';
+    sprite[0].Char.UnicodeChar = '>';
+    sprite[1].Char.UnicodeChar = 'o';
+    sprite[2].Char.UnicodeChar = '<';
 
     sprite[0].Attributes = 0x0006;
     sprite[1].Attributes = 0x0006;

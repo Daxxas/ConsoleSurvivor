@@ -25,16 +25,24 @@ void Bullet::Update() {
 
         this->timer.getElapsedMs(true);
     }
-    // Check if pos==anyEnemyPos
-	
-    for (Entity* enemy : GameManager::Instance()->enemies) {
-		//if (enemy->position == position) {
-			//enemy->TakeDamage(this->damage);
-		//}
-    }
-    
 
-	// Check if touches a wall
+    for (int i = 0; i < GameManager::Instance()->aliveEnemiesCount; i++) {
+        Creature *enemy = GameManager::Instance()->enemies[i];
+        if (enemy->isActive) {
+            if (enemy->position == position) {
+                enemy->TakeDamage(this->damage);
+                isActive = false;
+            }
+        }
+    }
+
+	if (position.x < 0 
+        || position.x > GameManager::Instance()->ARENA_WIDTH 
+        || position.y < 0 
+        || position.y > GameManager::Instance()->ARENA_HEIGHT) {
+		isActive = false;
+	}
+
 }
 
 void Bullet::Move(Vector2& direction) {

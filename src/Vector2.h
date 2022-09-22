@@ -7,6 +7,10 @@
 
 struct Vector2 {
 public:
+    int x;
+    int y;
+	
+public:
     Vector2(int x, int y);
     Vector2();
 	
@@ -19,7 +23,5 @@ public:
     Vector2 operator-(Vector2& other);
     Vector2& operator-=(Vector2& other);
     bool operator==(Vector2& other);
-    int x;
-    int y;
 };
 #endif

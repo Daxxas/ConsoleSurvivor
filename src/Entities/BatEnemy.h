@@ -15,6 +15,8 @@ public:
 public:
     BatEnemy(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed);
     void Update() override;
+    void TakeDamage(int) override;
+    void Die() override;
     void Move(Vector2&) override;
 
 };

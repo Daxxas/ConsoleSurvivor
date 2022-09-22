@@ -57,7 +57,7 @@ void Player::Shoot() {
 Bullet* Player::GetBullet() {
     if(bullets.empty()) {
         Vector2 *dir =  new Vector2(0, 0);
-        Bullet* bullet = new Bullet(position, *dir, 0, 0);
+        Bullet* bullet = new Bullet(position, *dir, 1, 0);
         GameManager::Instance()->AddEntity(bullet);
 
         return bullet;
@@ -87,6 +87,14 @@ void Player::Move(Vector2& direction) {
         directionBoostedHorizontal.normalize();
         lastHeadingDirection = directionBoostedHorizontal;
     }
+}
+
+void Player::TakeDamage(int dmg) {
+	
+}
+
+void Player::Die() {
+	
 }
 
 bool Player::checkIfMoveIsAllowed(Vector2& direction) {

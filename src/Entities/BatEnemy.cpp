@@ -36,6 +36,19 @@ void BatEnemy::Update() {
     }
 }
 
+void BatEnemy::TakeDamage(int dmg) {
+	this->health -= dmg;
+	if (this->health <= 0) {
+        Die();
+	}
+}
+
+void BatEnemy::Die() {
+    isActive = false;
+    // TODO
+}
+
+
 void BatEnemy::Move(Vector2& direction) {
     Vector2 directionBoostedHorizontal = direction;
     directionBoostedHorizontal.x *= Entity::horizontalSpeedBooster;

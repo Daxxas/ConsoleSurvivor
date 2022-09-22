@@ -27,6 +27,8 @@ public:
 	void Move(Vector2& direction);
     bool checkIfMoveIsAllowed(Vector2& direction);
     void Update();
+	void TakeDamage(int damage) override;
+    void Die() override;
     float& GetMoveSpeed() { return moveSpeed;}
     float& GetShootSpeed() { return shootSpeed;}
     Vector2& GetPosition() { return position; }

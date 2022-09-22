@@ -21,6 +21,8 @@ public:
     Creature(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed);
     bool checkIfMoveIsAllowed(Vector2& direction);
     void Update() {};
+    virtual void TakeDamage(int)=0;
+    virtual void Die()=0;
     float& GetMoveSpeed() { return moveSpeed; }
     Vector2& GetPosition() { return position; }
 };

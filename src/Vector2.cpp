@@ -41,11 +41,18 @@ Vector2 Vector2::add(Vector2 &other)
 Vector2 Vector2::operator-(Vector2 &other) {
     return Vector2(this->x - other.x, this->y - other.y);
 }
+
 Vector2& Vector2::operator-=(Vector2 &other) {
 
     this->x -= other.x;
     this->y -= other.y;
     return *this;
+}
+
+bool Vector2::operator==(Vector2& other) {
+    bool xEqual = (x == other.x);
+	bool yEqual = (y == other.y);
+	return (xEqual && yEqual);
 }
 
 Vector2 Vector2::multiply(int multiplier)

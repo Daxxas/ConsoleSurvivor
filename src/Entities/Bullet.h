@@ -4,6 +4,7 @@
 
 #include "../NYTimer.h"
 #include "Entity.h"
+#include "../GameManager.h"
 
 class Bullet : public Entity {
 private:

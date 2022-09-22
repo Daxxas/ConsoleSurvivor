@@ -58,7 +58,7 @@ Bullet* Player::GetBullet() {
     if(bullets.empty()) {
         Vector2 *dir =  new Vector2(0, 0);
         Bullet* bullet = new Bullet(position, *dir, 0, 0);
-        GameManager::Instance().AddEntity(bullet);
+        GameManager::Instance()->AddEntity(bullet);
 
         return bullet;
     }

@@ -18,6 +18,7 @@ public:
 
     Vector2 operator-(Vector2& other);
     Vector2& operator-=(Vector2& other);
+    bool operator==(Vector2& other);
     int x;
     int y;
 };

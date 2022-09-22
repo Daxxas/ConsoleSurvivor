@@ -9,6 +9,8 @@
 #include "Bullet.h"
 #include "Entity.h"
 
+class Bullet;
+
 class Player : public Entity {
 private:
     int maxHealth;

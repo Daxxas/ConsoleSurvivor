@@ -25,6 +25,16 @@ void Bullet::Update() {
 
         this->timer.getElapsedMs(true);
     }
+    // Check if pos==anyEnemyPos
+	
+    for (Entity* enemy : GameManager::Instance()->enemies) {
+		//if (enemy->position == position) {
+			//enemy->TakeDamage(this->damage);
+		//}
+    }
+    
+
+	// Check if touches a wall
 }
 
 void Bullet::Move(Vector2& direction) {

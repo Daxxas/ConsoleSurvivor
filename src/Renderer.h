@@ -18,5 +18,6 @@ private:
     CHAR_INFO * groundDeco[GameManager::ARENA_HEIGHT][GameManager::ARENA_WIDTH];
     HANDLE hOutput;
     void DisplayArena(Vector2 cameraTopLeft);
+    void DrawUI();
     GameManager *gameManager;
 };

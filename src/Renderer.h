@@ -6,7 +6,7 @@
 
 class Renderer {
 public:
-    static const int DISPLAY_WIDTH = 300;
+    static const int DISPLAY_WIDTH = 211;
     static const int DISPLAY_HEIGHT = 50;
     void Render();
     Renderer(HANDLE&);

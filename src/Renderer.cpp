@@ -61,6 +61,16 @@ void Renderer::Render() {
         buffer[y][DISPLAY_WIDTH-1].Attributes = 0x0002;
     }
 
+    std::string playerpos = "position: x: ";
+    playerpos += std::to_string(gameManager->GetPlayerPosition()->x);
+    playerpos += " y: ";
+    playerpos += std::to_string(gameManager->GetPlayerPosition()->y);
+
+    for (int i = 0; i < playerpos.length(); ++i) {
+        buffer[DISPLAY_HEIGHT-1][i].Char.AsciiChar = playerpos[i];
+        buffer[DISPLAY_HEIGHT-1][i].Attributes = 0x0002;
+    }
+
     WriteConsoleOutput(hOutput, (CHAR_INFO*)buffer, dwBufferSize, dwBufferCoord, &rcRegion);
     //std::cout << "x:" << gameManager->player->position.x << "- y:" << gameManager->player->position.y;
 }

@@ -21,6 +21,7 @@ private:
     InputHandler * inputHandler;
     int baseMsBetweenMovements = 150;
     int baseMsBetweenShoots = 500;
+    Vector2 lastHeadingDirection;
     void Shoot();
 public:
     Player(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed, InputHandler* inputHandler);

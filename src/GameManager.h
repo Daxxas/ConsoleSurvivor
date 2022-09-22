@@ -24,14 +24,20 @@ public:
     static const int ARENA_HEIGHT = 300;
     static const int xOffset = 2;
     static const int yOffset = 1;
-    static const int maxEntities = 800;
+    static const int maxEnemies = 100;
+    static const int maxEntities = 700 + maxEnemies;
     Entity * entities[maxEntities];
+    Entity * enemies[maxEnemies];
     Player * player;
 	InputHandler * inputHandler;
     int validEntityCount = 0;
+    int aliveEnemiesCount = 0;
 public:
     void RunGameLoop();
     void AddEntity(Entity * entity);
+    void SpawnEnemy();
+    void SpawnBat(Vector2&, int, int, int, int);
 	Vector2* GetPlayerPosition();
+    Vector2 GetNearestEnemyPosition();
     void SetActiveLastEntity(bool val);
 };

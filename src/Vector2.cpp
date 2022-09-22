@@ -14,6 +14,10 @@ Vector2::Vector2(int x, int y) {
     this->y = y;
 }
 
+float Vector2::GetMag() {
+    return sqrt(x * x + y * y);
+}
+
 void Vector2::normalize() {
     int newX, newY;
     // normalize vector

@@ -7,7 +7,8 @@ Player::Player(Vector2& position, int maxHealth, int damage, float attacksPerSec
     this->shootSpeed = attacksPerSecond;
     this->moveSpeed = moveSpeed;
     this->inputHandler = inputHandler;
-
+    this->lastHeadingDirection = Vector2(1, 0);
+	
     spriteWidth = 3;
     spriteHeight = 2;
 
@@ -49,14 +50,14 @@ void Player::Update() {
 
 void Player::Shoot() {
     Bullet* bullet = GetBullet();
-    bullet->direction = Vector2(0, -1);
+    bullet->direction = lastHeadingDirection;
     bullet->isActive = true;
 }
 
 Bullet* Player::GetBullet() {
     if(bullets.empty()) {
         Vector2 *dir =  new Vector2(0, 0);
-        Bullet* bullet = new Bullet(position,*dir, 0, 0);
+        Bullet* bullet = new Bullet(position, *dir, 0, 0);
         GameManager::Instance().AddEntity(bullet);
 
         return bullet;
@@ -79,9 +80,12 @@ void Player::Damage (int& damage) {
 
 void Player::Move(Vector2& direction) {
     if (checkIfMoveIsAllowed(direction)) {
-    Vector2 directionBoostedHorizontal = direction;
-    directionBoostedHorizontal.x *= Entity::horizontalSpeedBooster;
-	position = position.add(directionBoostedHorizontal);
+        Vector2 directionBoostedHorizontal = direction;
+        directionBoostedHorizontal.x *= Entity::horizontalSpeedBooster;
+	    position = position.add(directionBoostedHorizontal);
+
+        directionBoostedHorizontal.normalize();
+        lastHeadingDirection = directionBoostedHorizontal;
     }
 }
 

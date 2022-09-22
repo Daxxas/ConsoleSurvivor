@@ -4,13 +4,10 @@
 #include "../NYTimer.h"
 #include <iostream>
 #include <list>
-#include "Bullet.h"
 #include "Entity.h"
 
-class Bullet;
-
 class Creature : public Entity {
-private:
+protected:
     int maxHealth;
     int health;
     int damage;
@@ -19,9 +16,11 @@ private:
     NYTimer moveTimer;
     int baseMsBetweenMovements;
 public:
-    Player(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed, InputHandler* inputHandler);
-    void Damage(int& damage);
+    Creature();
+    Creature(Vector2& position);
+    Creature(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed);
     bool checkIfMoveIsAllowed(Vector2& direction);
+    void Update() {};
     float& GetMoveSpeed() { return moveSpeed; }
     Vector2& GetPosition() { return position; }
 };

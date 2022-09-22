@@ -11,7 +11,7 @@ public:
     static const int horizontalSpeedBooster = 2;
 		
     CHAR_INFO* Display();
-    virtual void Update() = 0;
+    virtual void Update() {};
     virtual void Move(Vector2&) = 0;
     bool isActive = false;
     Vector2 position;

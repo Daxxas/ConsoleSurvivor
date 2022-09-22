@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed, InputHandler * inputHandler) : Entity(position) {
+Player::Player(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed, InputHandler * inputHandler) : Creature(position) {
     this->maxHealth = maxHealth;
     this->health = maxHealth;
     this->damage = damage;

@@ -7,18 +7,14 @@
 #include <iostream>
 #include <list>
 #include "Bullet.h"
+#include "Creature.h"
 #include "Entity.h"
 
 class Bullet;
 
-class Player : public Entity {
+class Player : public Creature {
 private:
-    int maxHealth;
-    int health;
-    int damage;
-    float moveSpeed;
     float shootSpeed;
-    NYTimer moveTimer;
     NYTimer shootTimer;
     InputHandler * inputHandler;
     int baseMsBetweenMovements = 150;
@@ -30,7 +26,7 @@ public:
     void Damage(int& damage);
 	void Move(Vector2& direction);
     bool checkIfMoveIsAllowed(Vector2& direction);
-    void Update() override;
+    void Update();
     float& GetMoveSpeed() { return moveSpeed;}
     float& GetShootSpeed() { return shootSpeed;}
     Vector2& GetPosition() { return position; }

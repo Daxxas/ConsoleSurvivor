@@ -27,7 +27,7 @@ public:
     static const int maxEnemies = 100;
     static const int maxEntities = 700 + maxEnemies;
     Entity * entities[maxEntities];
-    Entity * enemies[maxEnemies];
+    Creature * enemies[maxEnemies];
     Player * player;
 	InputHandler * inputHandler;
     int validEntityCount = 0;

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Entity.h"
+#include "Creature.h"
 #include "../GameManager.h"
 
-class BatEnemy : public Entity {
+class BatEnemy : public Creature {
 public:
     int maxHealth;
     int health;

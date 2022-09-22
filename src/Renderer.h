@@ -3,6 +3,7 @@
 #include "InputHandler.h"
 #include "Entities/Player.h"
 #include "GameManager.h"
+#include <random>
 
 class Renderer {
 public:
@@ -14,7 +15,8 @@ public:
 private:
     void CleanBuffer();
     CHAR_INFO buffer[DISPLAY_HEIGHT][DISPLAY_WIDTH];
+    CHAR_INFO * groundDeco[GameManager::ARENA_HEIGHT][GameManager::ARENA_WIDTH];
     HANDLE hOutput;
     void DisplayArena(Vector2 cameraTopLeft);
-    GameManager* gameManager;
+    GameManager *gameManager;
 };

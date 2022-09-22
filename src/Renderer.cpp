@@ -2,7 +2,27 @@
 
 Renderer::Renderer(HANDLE& hOutput) {
     this->hOutput = hOutput;
-    gameManager = &GameManager::Instance();
+    gameManager = GameManager::Instance();
+
+    for (int y = 0; y < GameManager::ARENA_HEIGHT; ++y) {
+        for (int x = 0; x < GameManager::ARENA_WIDTH; ++x) {
+            groundDeco[y][x] = new CHAR_INFO();
+
+            int randval = rand() % 200;
+
+            if(randval == 0) {
+
+                groundDeco[y][x]->Char.AsciiChar = '.';
+                groundDeco[y][x]->Attributes = 0x0F;
+            }
+            else {
+
+                groundDeco[y][x]->Char.AsciiChar = ' ';
+                groundDeco[y][x]->Attributes = 0;
+            }
+
+        }
+    }
 }
 
 void Renderer::Render() {
@@ -89,10 +109,7 @@ void Renderer::DisplayArena(Vector2 cameraTopLeft) {
     for (int x = 0; x < DISPLAY_WIDTH; ++x) {
         for (int y = 0; y < DISPLAY_HEIGHT; ++y) {
 
-            if((cameraTopLeft.x + x) % 4 == 0 && (cameraTopLeft.y + y) % 4 == 0) {
-                buffer[y][x].Char.AsciiChar = '.';
-                buffer[y][x].Attributes = 0x0F;
-            }
+            buffer[y][x] = *groundDeco[cameraTopLeft.y + y][cameraTopLeft.x + x];
 
             if(cameraTopLeft.x + x <= 0 || cameraTopLeft.x + x >= GameManager::ARENA_WIDTH-1 || cameraTopLeft.y + y <= 0 || cameraTopLeft.y + y >= GameManager::ARENA_HEIGHT-1) {
                 buffer[y][x].Char.AsciiChar = '#';

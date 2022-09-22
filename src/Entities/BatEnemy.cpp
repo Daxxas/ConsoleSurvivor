@@ -26,7 +26,7 @@ BatEnemy::BatEnemy(Vector2& position, int maxHealth, int damage, float attacksPe
 
 void BatEnemy::Update() {
     if (timer.getElapsedMs(false) > baseMsBetweenMovements / moveSpeed) {
-        Vector2 playerPosition = *GameManager::Instance().GetPlayerPosition();
+        Vector2 playerPosition = *GameManager::Instance()->GetPlayerPosition();
         Vector2 directionToFollow = playerPosition - this->position;
 		
         directionToFollow.normalize();

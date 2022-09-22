@@ -67,6 +67,15 @@ Vector2 GameManager::GetNearestEnemyPosition() {
     return Vector2(enemies[indexOfNearestEnemy]->position.x, enemies[indexOfNearestEnemy]->position.y);
 }
 
+GameManager* GameManager::Instance() {
+    if(instance == nullptr) {
+        instance = new GameManager();
+    }
+    return instance;
+}
+
+GameManager * GameManager::instance = nullptr;
+
 GameManager::~GameManager() = default;
 
 

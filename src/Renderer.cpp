@@ -2,7 +2,7 @@
 
 Renderer::Renderer(HANDLE& hOutput) {
     this->hOutput = hOutput;
-    gameManager = &GameManager::Instance();
+    gameManager = GameManager::Instance();
 }
 
 void Renderer::Render() {

@@ -40,6 +40,16 @@ Vector2* GameManager::GetPlayerPosition() {
 	return playerPosition;
 }
 
+GameManager* GameManager::Instance() {
+    if(instance == nullptr) {
+        instance = new GameManager();
+    }
+    return instance;
+}
+
+GameManager * GameManager::instance = nullptr;
+
+
 GameManager::~GameManager() = default;
 
 

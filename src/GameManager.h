@@ -8,16 +8,16 @@
 #include "Entities/Bullet.h"
 
 class Player;
+
+
 class GameManager {
 //Singleton pattern
-public:
-    static GameManager& Instance() {
-        static GameManager S;
-        return S;
-    }
 private:
+    static GameManager *instance;
     GameManager();
     ~GameManager();
+public:
+    static GameManager* Instance();
 
 public:
     static const int ARENA_WIDTH = 300;

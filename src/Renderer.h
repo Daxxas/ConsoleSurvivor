@@ -16,5 +16,5 @@ private:
     CHAR_INFO buffer[DISPLAY_HEIGHT][DISPLAY_WIDTH];
     HANDLE hOutput;
     void DisplayArena(Vector2 cameraTopLeft);
-    GameManager* gameManager;
+    GameManager *gameManager;
 };

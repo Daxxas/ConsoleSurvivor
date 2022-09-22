@@ -84,19 +84,20 @@ void Renderer::CleanBuffer() {
 
 void Renderer::DrawUI() {
 
-    // Borders
-    for (int x = 0; x < DISPLAY_WIDTH; ++x) {
-        buffer[0][x].Char.UnicodeChar = 0x2445;
-        buffer[0][x].Attributes = FOREGROUND_GREEN;
-        buffer[DISPLAY_HEIGHT-1][x].Char.UnicodeChar = 0x2445;
-        buffer[DISPLAY_HEIGHT-1][x].Attributes = FOREGROUND_GREEN;
-    }
+    // XP BAR
 
-    for (int y = 0; y < DISPLAY_HEIGHT; ++y) {
-        buffer[y][0].Char.UnicodeChar = 0x2580;
-        buffer[y][0].Attributes = FOREGROUND_GREEN;
-        buffer[y][DISPLAY_WIDTH-1].Char.UnicodeChar = 0x2580;
-        buffer[y][DISPLAY_WIDTH-1].Attributes = FOREGROUND_GREEN;
+
+    float xpPercent = (float)gameManager->player->xp / (float)gameManager->player->maxXP;
+    int xpBarWidth = (int)(DISPLAY_WIDTH * xpPercent);
+    for (int x = 0; x < xpBarWidth; ++x) {
+        buffer[0][x].Char.UnicodeChar = 0x2580;
+        buffer[0][x].Attributes = FOREGROUND_BLUE | FOREGROUND_INTENSITY | BACKGROUND_BLUE | BACKGROUND_INTENSITY;
+    }
+    std::string levelText = "Level: " + std::to_string(gameManager->player->level);
+
+    for (int i = 0; i < levelText.length(); ++i) {
+        buffer[1][(DISPLAY_WIDTH-levelText.length())/2 + i].Char.UnicodeChar = levelText[i];
+        buffer[1][(DISPLAY_WIDTH-levelText.length())/2 + i].Attributes = FOREGROUND_BLUE | FOREGROUND_INTENSITY;
     }
 
     // Player position

@@ -12,7 +12,7 @@ Bullet::Bullet(Vector2& position, Vector2& direction, int damage, float speed) :
     spriteHeight = 1;
 
     sprite = new CHAR_INFO[spriteWidth * spriteHeight];
-    sprite[0].Char.AsciiChar = '*';
+    sprite[0].Char.UnicodeChar = '*';
     sprite[0].Attributes = 0x0006;
 
     timer.start();

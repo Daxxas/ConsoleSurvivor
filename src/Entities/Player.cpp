@@ -8,7 +8,9 @@ Player::Player(Vector2& position, int maxHealth, int damage, float attacksPerSec
     this->moveSpeed = moveSpeed;
     this->inputHandler = inputHandler;
     this->lastHeadingDirection = Vector2(1, 0);
-	
+    level = 1;
+    this->xp = 0;
+    this->maxXP = baseMaxXP;
     spriteWidth = 3;
     spriteHeight = 2;
 
@@ -38,6 +40,8 @@ void Player::Update() {
     if (moveTimer.getElapsedMs(false) > baseMsBetweenMovements/moveSpeed) {
         if (direction->x != 0 || direction->y != 0) {
             Move(*direction);
+            // Debug, todo : remove
+            GiveXP(1);
             this->moveTimer.getElapsedMs(true);
         }
     }
@@ -46,6 +50,32 @@ void Player::Update() {
         Shoot();
         this->shootTimer.getElapsedMs(true);
     }
+
+}
+
+void Player::GiveXP(int xp) {
+    this->xp += xp;
+    if (this->xp >= this->maxXP) {
+        LevelUp();
+    }
+}
+
+void Player::LevelUp() {
+    level++;
+    int increaseByLevel;
+
+    if(level <= 20) {
+        increaseByLevel = 10;
+    }
+    else if (level <= 40) {
+        increaseByLevel = 13;
+    }
+    else {
+        increaseByLevel = 16;
+    }
+    // Substraction in case player has more than maxXP
+    xp = xp - maxXP;
+    maxXP = baseMaxXP + (level-1) * increaseByLevel;
 }
 
 void Player::Shoot() {

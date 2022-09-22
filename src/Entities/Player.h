@@ -21,6 +21,8 @@ private:
     int baseMsBetweenShoots = 500;
     Vector2 lastHeadingDirection;
     void Shoot();
+    void LevelUp();
+    const int baseMaxXP = 5;
 public:
     Player(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed, InputHandler* inputHandler);
     void Damage(int& damage);
@@ -30,7 +32,10 @@ public:
     float& GetMoveSpeed() { return moveSpeed;}
     float& GetShootSpeed() { return shootSpeed;}
     Vector2& GetPosition() { return position; }
-
+    int xp;
+    int maxXP;
+    int level = 1;
+    void GiveXP(int xp);
 // Bullet management
 public:
     std::list<Bullet*> bullets;

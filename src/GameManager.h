@@ -2,13 +2,14 @@
 
 #include "NYTimer.h"
 #include "Vector2.h"
+#include "Upgrades/UpgradeList.h"
 #include "InputHandler.h"
 #include "Entities/Player.h"
 #include "Entities/BatEnemy.h"
 #include "Entities/Bullet.h"
 
 class Player;
-
+class UpgradeList;
 
 class GameManager {
 //Singleton pattern
@@ -32,7 +33,9 @@ public:
 	InputHandler * inputHandler;
     int validEntityCount = 0;
     int aliveEnemiesCount = 0;
+    bool pause = false;
 public:
+    UpgradeList *upgradeList;
     void RunGameLoop();
     void AddEntity(Entity * entity);
     void SpawnEnemy();

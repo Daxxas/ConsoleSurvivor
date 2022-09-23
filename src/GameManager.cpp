@@ -4,6 +4,7 @@ GameManager::GameManager() {
 	inputHandler = new InputHandler();
 	Vector2* playerSpawnPosition = new Vector2(ARENA_WIDTH/2, ARENA_HEIGHT/2);
 	player = new Player(*playerSpawnPosition, 1, 1, 1, 1, inputHandler);
+    upgradeList = new UpgradeList();
     AddEntity(player);
     entities[validEntityCount-1]->isActive = true;
 
@@ -32,10 +33,11 @@ void GameManager::SetActiveLastEntity(bool val) {
 }
 
 void GameManager::RunGameLoop() {
-
-    for (int i = 0; i < validEntityCount; ++i) {
-        if(entities[i]->isActive) {
-            entities[i]->Update();
+    if(!pause) {
+        for (int i = 0; i < validEntityCount; ++i) {
+            if(entities[i]->isActive) {
+                entities[i]->Update();
+            }
         }
     }
 }

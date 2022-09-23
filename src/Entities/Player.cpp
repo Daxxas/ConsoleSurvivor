@@ -76,6 +76,9 @@ void Player::LevelUp() {
     // Substraction in case player has more than maxXP
     xp = xp - maxXP;
     maxXP = baseMaxXP + (level-1) * increaseByLevel;
+    playerLeveledUp = true;
+    GameManager::Instance()->pause = true;
+    GameManager::Instance()->upgradeList->RefreshUpgrades();
 }
 
 void Player::Shoot() {

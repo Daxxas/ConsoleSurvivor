@@ -35,6 +35,7 @@ public:
     int aliveEnemiesCount = 0;
     bool pause = false;
 public:
+    int selectedUpgradeIndex = 0;
     UpgradeList *upgradeList;
     void RunGameLoop();
     void AddEntity(Entity * entity);

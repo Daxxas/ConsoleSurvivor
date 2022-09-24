@@ -1,6 +1,6 @@
 #include "MoveSpeedUpgrade.h"
 
-MoveSpeedUpgrade::MoveSpeedUpgrade() {
+MoveSpeedUpgrade::MoveSpeedUpgrade() : level(0) {
 
 
 
@@ -22,9 +22,10 @@ MoveSpeedUpgrade::MoveSpeedUpgrade() {
         }
     }
 
-    name = "Move Speed Upgrade";
+    name = "Move Speed++";
 }
 
 void MoveSpeedUpgrade::ApplyUpgrade() {
     GameManager::Instance()->player->moveSpeed += 0.1f;
+    level++;
 }

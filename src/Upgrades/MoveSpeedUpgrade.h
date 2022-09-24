@@ -4,9 +4,9 @@
 #include "../GameManager.h"
 #include "Upgrade.h"
 
-class MoveSpeedUpgrade : public Upgrade
-{
+class MoveSpeedUpgrade : public Upgrade {
 public:
+    int level = 0;
     MoveSpeedUpgrade();
     void ApplyUpgrade() override;
 };

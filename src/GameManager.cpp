@@ -40,6 +40,15 @@ void GameManager::RunGameLoop() {
             }
         }
     }
+    else {
+//        Vector2* direction = inputHandler->DetectMovementDirectionFromPlayer();
+//
+//        if(direction->x == 1 || direction->x == -1) {
+//            selectedUpgradeIndex += direction->x;
+//            selectedUpgradeIndex = selectedUpgradeIndex % upgradeList->choiceCount;
+//        }
+    }
+
 }
 
 Vector2* GameManager::GetPlayerPosition() {

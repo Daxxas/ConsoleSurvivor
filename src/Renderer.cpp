@@ -150,6 +150,7 @@ void Renderer::DrawUI() {
             }
         }
 
+        // upgrades
         std::string upgradeText = "Choose an upgrade:";
         for (int i = 0; i < upgradeText.length(); ++i) {
             buffer[topLeft.y + 2][(DISPLAY_WIDTH-upgradeText.length())/2 + i].Char.UnicodeChar = upgradeText[i];
@@ -157,8 +158,15 @@ void Renderer::DrawUI() {
         }
 
         for (int i = 0; i < UpgradeList::choiceCount; ++i) {
+
+            WORD upgradeColor = FOREGROUND_BLUE | FOREGROUND_INTENSITY;
+            if(i == gameManager->selectedUpgradeIndex) {
+                upgradeColor = 0x0F;
+            }
+
             Upgrade *currentUpgrade = gameManager->upgradeList->currentUpgrades[i];
             std::string upgradeChoiceName = currentUpgrade->name;
+            std::string upgradeLevel = "lvl. " + std::to_string(currentUpgrade->level);
             CHAR_INFO* upgradeSprite = currentUpgrade->sprite;
             int spriteWidth = currentUpgrade->spriteWidth;
             int spriteHeight = currentUpgrade->spriteHeight;
@@ -168,6 +176,16 @@ void Renderer::DrawUI() {
                     buffer[topLeft.y + upgradeHeight/2 - spriteHeight/2 + y][topLeft.x + upgradeWidth/2 - (spriteWidth + 10 + spriteWidth/2) + x + i * (spriteWidth + 10)].Char.UnicodeChar = upgradeSprite[y * spriteWidth + x].Char.UnicodeChar;
                     buffer[topLeft.y + upgradeHeight/2 - spriteHeight/2 + y][topLeft.x + upgradeWidth/2 - (spriteWidth + 10 + spriteWidth/2) + x + i * (spriteWidth + 10)].Attributes = upgradeSprite[y * spriteWidth + x].Attributes;
                 }
+            }
+
+            for (int j = 0; j < upgradeChoiceName.length(); ++j) {
+                buffer[topLeft.y + upgradeHeight/2 + spriteHeight/2][(DISPLAY_WIDTH-upgradeChoiceName.length())/2 + i * (spriteWidth + 10) + j - 18].Char.UnicodeChar = upgradeChoiceName[j];
+                buffer[topLeft.y + upgradeHeight/2 + spriteHeight/2][(DISPLAY_WIDTH-upgradeChoiceName.length())/2 + i * (spriteWidth + 10) + j - 18].Attributes = upgradeColor;
+            }
+
+            for (int j = 0; j < upgradeLevel.length(); ++j) {
+                buffer[topLeft.y + upgradeHeight/2 + spriteHeight/2 + 1][(DISPLAY_WIDTH-upgradeChoiceName.length())/2 + i * (spriteWidth + 10) + j - 18].Char.UnicodeChar = upgradeLevel[j];
+                buffer[topLeft.y + upgradeHeight/2 + spriteHeight/2 + 1][(DISPLAY_WIDTH-upgradeChoiceName.length())/2 + i * (spriteWidth + 10) + j - 18].Attributes = upgradeColor;
             }
         }
     }

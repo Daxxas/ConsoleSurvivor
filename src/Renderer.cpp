@@ -143,7 +143,7 @@ void Renderer::DrawUI() {
         }
 
         // Fill the background
-        for (int i = 0; i < upgradeHeight - 2; ++i) {
+        for (int i = 0; i < upgradeHeight - 1; ++i) {
             for (int j = 0; j < upgradeWidth - 2; ++j) {
                 buffer[i + topLeft.y + 1][j + topLeft.x + 1].Char.UnicodeChar = ' ';
                 buffer[i + topLeft.y + 1][j + topLeft.x + 1].Attributes = FOREGROUND_BLUE | FOREGROUND_INTENSITY;

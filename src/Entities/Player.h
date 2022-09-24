@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CONSOLESURVIVOR_PLAYER_H
 #define CONSOLESURVIVOR_PLAYER_H
 
@@ -37,6 +39,7 @@ public:
     int xp;
     int maxXP;
     int level = 1;
+    bool playerLeveledUp = false;
     void GiveXP(int xp);
 // Bullet management
 public:

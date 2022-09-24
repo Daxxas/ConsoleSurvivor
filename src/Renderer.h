@@ -1,8 +1,8 @@
 #pragma once
 #include "NYTimer.h"
 #include "InputHandler.h"
-#include "Entities/Player.h"
 #include "GameManager.h"
+#include "Entities/Player.h"
 #include <random>
 
 class Renderer {

@@ -35,11 +35,11 @@ Player::Player(Vector2& position, int maxHealth, int damage, float attacksPerSec
 }
 
 void Player::Update() {
-    Vector2* direction = this->inputHandler->DetectMovementDirectionFromPlayer();
+    Vector2 direction = this->inputHandler->DetectMovementDirectionFromPlayer();
 
     if (moveTimer.getElapsedMs(false) > baseMsBetweenMovements/moveSpeed) {
-        if (direction->x != 0 || direction->y != 0) {
-            Move(*direction);
+        if (direction.x != 0 || direction.y != 0) {
+            Move(direction);
             // Debug, todo : remove
             GiveXP(1);
             this->moveTimer.getElapsedMs(true);
@@ -76,6 +76,9 @@ void Player::LevelUp() {
     // Substraction in case player has more than maxXP
     xp = xp - maxXP;
     maxXP = baseMaxXP + (level-1) * increaseByLevel;
+    playerLeveledUp = true;
+    GameManager::Instance()->pause = true;
+    GameManager::Instance()->upgradeList->RefreshUpgrades();
 }
 
 void Player::Shoot() {

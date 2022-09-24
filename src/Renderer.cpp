@@ -85,8 +85,6 @@ void Renderer::CleanBuffer() {
 void Renderer::DrawUI() {
 
     // XP BAR
-
-
     float xpPercent = (float)gameManager->player->xp / (float)gameManager->player->maxXP;
     int xpBarWidth = (int)(DISPLAY_WIDTH * xpPercent);
     for (int x = 0; x < xpBarWidth; ++x) {
@@ -110,6 +108,87 @@ void Renderer::DrawUI() {
         buffer[DISPLAY_HEIGHT-1][i].Char.UnicodeChar = playerpos[i];
         buffer[DISPLAY_HEIGHT-1][i].Attributes = 0x0002;
     }
+
+    if(gameManager->player->playerLeveledUp) {
+        int upgradeWidth = 80;
+        int upgradeHeight = 20;
+
+        Vector2 topLeft = Vector2((DISPLAY_WIDTH - upgradeWidth) / 2, (DISPLAY_HEIGHT - upgradeHeight) / 2);
+
+        // Borders
+        for (int i = 0; i < upgradeHeight; ++i) {
+            buffer[i + topLeft.y][topLeft.x].Char.UnicodeChar = '|';
+            buffer[i + topLeft.y][topLeft.x].Attributes = FOREGROUND_BLUE | FOREGROUND_INTENSITY;
+        }
+        for (int i = 0; i < upgradeHeight; ++i) {
+            buffer[i + topLeft.y][(DISPLAY_WIDTH + upgradeWidth)/2 - 1].Char.UnicodeChar = '|';
+            buffer[i + topLeft.y][(DISPLAY_WIDTH + upgradeWidth)/2 - 1].Attributes = FOREGROUND_BLUE | FOREGROUND_INTENSITY;
+        }
+
+        for (int i = 0; i < upgradeWidth; ++i) {
+            buffer[topLeft.y][i + topLeft.x].Char.UnicodeChar = '-';
+            buffer[topLeft.y][i + topLeft.x].Attributes = FOREGROUND_BLUE | FOREGROUND_INTENSITY;
+        }
+
+        for (int i = 0; i < upgradeWidth; ++i) {
+            buffer[(DISPLAY_HEIGHT + upgradeHeight)/2][i + topLeft.x].Char.UnicodeChar = '-';
+            buffer[(DISPLAY_HEIGHT + upgradeHeight)/2][i + topLeft.x].Attributes = FOREGROUND_BLUE | FOREGROUND_INTENSITY;
+        }
+
+        std::string levelUpText = "Level up!";
+
+        for (int i = 0; i < levelUpText.length(); ++i) {
+            buffer[topLeft.y][(DISPLAY_WIDTH-levelUpText.length())/2 + i].Char.UnicodeChar = levelUpText[i];
+            buffer[topLeft.y][(DISPLAY_WIDTH-levelUpText.length())/2 + i].Attributes = FOREGROUND_BLUE | FOREGROUND_INTENSITY;
+        }
+
+        // Fill the background
+        for (int i = 0; i < upgradeHeight - 1; ++i) {
+            for (int j = 0; j < upgradeWidth - 2; ++j) {
+                buffer[i + topLeft.y + 1][j + topLeft.x + 1].Char.UnicodeChar = ' ';
+                buffer[i + topLeft.y + 1][j + topLeft.x + 1].Attributes = FOREGROUND_BLUE | FOREGROUND_INTENSITY;
+            }
+        }
+
+        // upgrades
+        std::string upgradeText = "Choose an upgrade:";
+        for (int i = 0; i < upgradeText.length(); ++i) {
+            buffer[topLeft.y + 2][(DISPLAY_WIDTH-upgradeText.length())/2 + i].Char.UnicodeChar = upgradeText[i];
+            buffer[topLeft.y + 2][(DISPLAY_WIDTH-upgradeText.length())/2 + i].Attributes = FOREGROUND_BLUE | FOREGROUND_INTENSITY;
+        }
+
+        for (int i = 0; i < UpgradeList::choiceCount; ++i) {
+
+            WORD upgradeColor = FOREGROUND_BLUE | FOREGROUND_INTENSITY;
+            if(i == gameManager->selectedUpgradeIndex) {
+                upgradeColor = 0x0F;
+            }
+
+            Upgrade *currentUpgrade = gameManager->upgradeList->currentUpgrades[i];
+            std::string upgradeChoiceName = currentUpgrade->name;
+            std::string upgradeLevel = "lvl. " + std::to_string(currentUpgrade->level);
+            CHAR_INFO* upgradeSprite = currentUpgrade->sprite;
+            int spriteWidth = currentUpgrade->spriteWidth;
+            int spriteHeight = currentUpgrade->spriteHeight;
+
+            for (int x = 0; x < spriteWidth; ++x) {
+                for (int y = 0; y < spriteHeight; ++y) {
+                    buffer[topLeft.y + upgradeHeight/2 - spriteHeight/2 + y][topLeft.x + upgradeWidth/2 - (spriteWidth + 10 + spriteWidth/2) + x + i * (spriteWidth + 10)].Char.UnicodeChar = upgradeSprite[y * spriteWidth + x].Char.UnicodeChar;
+                    buffer[topLeft.y + upgradeHeight/2 - spriteHeight/2 + y][topLeft.x + upgradeWidth/2 - (spriteWidth + 10 + spriteWidth/2) + x + i * (spriteWidth + 10)].Attributes = upgradeColor;
+                }
+            }
+
+            for (int j = 0; j < upgradeChoiceName.length(); ++j) {
+                buffer[topLeft.y + upgradeHeight/2 + spriteHeight/2][(DISPLAY_WIDTH-upgradeChoiceName.length())/2 + i * (spriteWidth + 10) + j - 18].Char.UnicodeChar = upgradeChoiceName[j];
+                buffer[topLeft.y + upgradeHeight/2 + spriteHeight/2][(DISPLAY_WIDTH-upgradeChoiceName.length())/2 + i * (spriteWidth + 10) + j - 18].Attributes = upgradeColor;
+            }
+
+            for (int j = 0; j < upgradeLevel.length(); ++j) {
+                buffer[topLeft.y + upgradeHeight/2 + spriteHeight/2 + 1][(DISPLAY_WIDTH-upgradeChoiceName.length())/2 + i * (spriteWidth + 10) + j - 18].Char.UnicodeChar = upgradeLevel[j];
+                buffer[topLeft.y + upgradeHeight/2 + spriteHeight/2 + 1][(DISPLAY_WIDTH-upgradeChoiceName.length())/2 + i * (spriteWidth + 10) + j - 18].Attributes = upgradeColor;
+            }
+        }
+    }
 }
 
 void Renderer::DisplayArena(Vector2 cameraTopLeft) {
@@ -117,12 +196,14 @@ void Renderer::DisplayArena(Vector2 cameraTopLeft) {
     for (int x = 0; x < DISPLAY_WIDTH; ++x) {
         for (int y = 0; y < DISPLAY_HEIGHT; ++y) {
 
-            buffer[y][x] = *groundDeco[cameraTopLeft.y + y][cameraTopLeft.x + x];
-
             if(cameraTopLeft.x + x <= 0 || cameraTopLeft.x + x >= GameManager::ARENA_WIDTH-1 || cameraTopLeft.y + y <= 0 || cameraTopLeft.y + y >= GameManager::ARENA_HEIGHT-1) {
                 buffer[y][x].Char.UnicodeChar = '#';
                 buffer[y][x].Attributes = 0x0F;
+                continue;
             }
+
+            buffer[y][x] = *groundDeco[cameraTopLeft.y + y][cameraTopLeft.x + x];
+
         }
     }
 }

@@ -1,3 +1,4 @@
+#pragma once
 #ifndef CONSOLESURVIVOR_CREATURE_H
 #define CONSOLESURVIVOR_CREATURE_H
 
@@ -11,11 +12,11 @@ protected:
     int maxHealth;
     int health;
     int damage;
-    float moveSpeed;
-    float shootSpeed;
     NYTimer moveTimer;
     int baseMsBetweenMovements;
 public:
+    float moveSpeed;
+    float shootSpeed;
     Creature();
     Creature(Vector2& position);
     Creature(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed);

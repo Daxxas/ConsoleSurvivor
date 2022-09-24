@@ -6,7 +6,6 @@
 
 class MoveSpeedUpgrade : public Upgrade {
 public:
-    int level = 0;
     MoveSpeedUpgrade();
     void ApplyUpgrade() override;
 };

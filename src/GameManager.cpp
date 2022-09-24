@@ -2,6 +2,7 @@
 
 GameManager::GameManager() {
 	inputHandler = new InputHandler();
+    inputMenuTimer = new NYTimer();
 	Vector2* playerSpawnPosition = new Vector2(ARENA_WIDTH/2, ARENA_HEIGHT/2);
 	player = new Player(*playerSpawnPosition, 1, 1, 1, 1, inputHandler);
     upgradeList = new UpgradeList();
@@ -9,6 +10,7 @@ GameManager::GameManager() {
     entities[validEntityCount-1]->isActive = true;
 
     SpawnEnemy();
+    inputMenuTimer->start();
 }
 
 void GameManager::AddEntity(Entity *entity) {
@@ -17,7 +19,8 @@ void GameManager::AddEntity(Entity *entity) {
 }
 
 void GameManager::SpawnEnemy() {
-    SpawnBat(Vector2(20, 20), 1, 1, 1, 1);
+    Vector2 batpos = Vector2(20, 20);
+    SpawnBat(batpos, 1, 1, 1, 1);
 }
 
 void GameManager::SpawnBat(Vector2& spawnPos, int maxHealth, int damage, int attacksPerSecond, int moveSpeed) {
@@ -33,6 +36,8 @@ void GameManager::SetActiveLastEntity(bool val) {
 }
 
 void GameManager::RunGameLoop() {
+    inputHandler->Update();
+
     if(!pause) {
         for (int i = 0; i < validEntityCount; ++i) {
             if(entities[i]->isActive) {
@@ -41,12 +46,21 @@ void GameManager::RunGameLoop() {
         }
     }
     else {
-//        Vector2* direction = inputHandler->DetectMovementDirectionFromPlayer();
-//
-//        if(direction->x == 1 || direction->x == -1) {
-//            selectedUpgradeIndex += direction->x;
-//            selectedUpgradeIndex = selectedUpgradeIndex % upgradeList->choiceCount;
-//        }
+        Vector2 direction = inputHandler->DetectReleaseDirection();
+
+        if(direction.x == 1 || direction.x == -1) {
+            selectedUpgradeIndex += direction.x;
+            if(selectedUpgradeIndex == -1) {
+                selectedUpgradeIndex = upgradeList->choiceCount-1;
+            }
+            selectedUpgradeIndex = selectedUpgradeIndex % upgradeList->choiceCount;
+        }
+
+        if(inputHandler->IsVKeyReleased(VK_SPACE)) {
+            upgradeList->currentUpgrades[selectedUpgradeIndex]->ApplyUpgrade();
+            pause = false;
+            player->playerLeveledUp = false;
+        }
     }
 
 }

@@ -34,6 +34,7 @@ public:
     int validEntityCount = 0;
     int aliveEnemiesCount = 0;
     bool pause = false;
+    NYTimer *inputMenuTimer;
 public:
     int selectedUpgradeIndex = 0;
     UpgradeList *upgradeList;

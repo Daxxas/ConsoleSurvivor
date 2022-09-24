@@ -1,8 +1,8 @@
 #include "MoveSpeedUpgrade.h"
 
-MoveSpeedUpgrade::MoveSpeedUpgrade() : level(0) {
+MoveSpeedUpgrade::MoveSpeedUpgrade() {
 
-
+    level = 0;
 
     spriteWidth = 8;
     spriteHeight = 4;

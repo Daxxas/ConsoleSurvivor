@@ -174,7 +174,7 @@ void Renderer::DrawUI() {
             for (int x = 0; x < spriteWidth; ++x) {
                 for (int y = 0; y < spriteHeight; ++y) {
                     buffer[topLeft.y + upgradeHeight/2 - spriteHeight/2 + y][topLeft.x + upgradeWidth/2 - (spriteWidth + 10 + spriteWidth/2) + x + i * (spriteWidth + 10)].Char.UnicodeChar = upgradeSprite[y * spriteWidth + x].Char.UnicodeChar;
-                    buffer[topLeft.y + upgradeHeight/2 - spriteHeight/2 + y][topLeft.x + upgradeWidth/2 - (spriteWidth + 10 + spriteWidth/2) + x + i * (spriteWidth + 10)].Attributes = upgradeSprite[y * spriteWidth + x].Attributes;
+                    buffer[topLeft.y + upgradeHeight/2 - spriteHeight/2 + y][topLeft.x + upgradeWidth/2 - (spriteWidth + 10 + spriteWidth/2) + x + i * (spriteWidth + 10)].Attributes = upgradeColor;
                 }
             }
 

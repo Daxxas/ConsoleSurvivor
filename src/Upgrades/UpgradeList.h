@@ -4,12 +4,13 @@
 #define CONSOLESURVIVOR_UPGRADELIST_H
 
 #include "Upgrade.h"
+#include "AttackSpeedUpgrade.h"
 #include "MoveSpeedUpgrade.h"
 #include <random>
 
 class UpgradeList {
 private:
-    static const int upgradesCount = 1;
+    static const int upgradesCount = 2;
     Upgrade* upgrades[upgradesCount];
     int weights[upgradesCount];
 public:

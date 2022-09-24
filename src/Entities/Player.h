@@ -16,7 +16,6 @@ class Bullet;
 
 class Player : public Creature {
 private:
-    float shootSpeed;
     NYTimer shootTimer;
     InputHandler * inputHandler;
     int baseMsBetweenMovements = 150;
@@ -36,6 +35,7 @@ public:
     float& GetMoveSpeed() { return moveSpeed;}
     float& GetShootSpeed() { return shootSpeed;}
     Vector2& GetPosition() { return position; }
+    float shootSpeed;
     int xp;
     int maxXP;
     int level = 1;

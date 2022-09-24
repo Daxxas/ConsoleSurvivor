@@ -6,25 +6,29 @@
 
 UpgradeList::UpgradeList() {
     upgrades[0] = new MoveSpeedUpgrade();
-    weights[0] = 1;
+    weights[0] = 10;
+    upgrades[1] = new AttackSpeedUpgrade();
+    weights[1] = 10;
 
 }
 
 void UpgradeList::RefreshUpgrades() {
-    int weigthsum = 0;
-    for (int i = 0; i < upgradesCount; i++) {
-        weigthsum += weights[i];
-    }
 
     for (int i = 0; i < choiceCount; i++) {
+        int weigthsum = 0;
+        for (int j = 0; j < upgradesCount; j++) {
+            weigthsum += weights[j];
+        }
+
         int random = rand() % weigthsum;
         int currentWeight = 0;
+
         for (int j = 0; j < upgradesCount; j++) {
-            currentWeight += weights[j];
-            if (random < currentWeight) {
+            if (random < weights[j]) {
                 currentUpgrades[i] = upgrades[j];
                 break;
             }
+            random -= weights[j];
         }
     }
 }

@@ -36,8 +36,6 @@ void GameManager::SetActiveLastEntity(bool val) {
 }
 
 void GameManager::RunGameLoop() {
-    inputHandler->Update();
-
     if(!pause) {
         for (int i = 0; i < validEntityCount; ++i) {
             if(entities[i]->isActive) {
@@ -46,6 +44,8 @@ void GameManager::RunGameLoop() {
         }
     }
     else {
+        inputHandler->Update();
+
         Vector2 direction = inputHandler->DetectReleaseDirection();
 
         if(direction.x == 1 || direction.x == -1) {

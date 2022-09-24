@@ -35,11 +35,11 @@ Player::Player(Vector2& position, int maxHealth, int damage, float attacksPerSec
 }
 
 void Player::Update() {
-    Vector2* direction = this->inputHandler->DetectMovementDirectionFromPlayer();
+    Vector2 direction = this->inputHandler->DetectMovementDirectionFromPlayer();
 
     if (moveTimer.getElapsedMs(false) > baseMsBetweenMovements/moveSpeed) {
-        if (direction->x != 0 || direction->y != 0) {
-            Move(*direction);
+        if (direction.x != 0 || direction.y != 0) {
+            Move(direction);
             // Debug, todo : remove
             GiveXP(1);
             this->moveTimer.getElapsedMs(true);

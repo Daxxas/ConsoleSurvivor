@@ -7,7 +7,7 @@ class InputHandler {
 public:
     InputHandler();
     Vector2 GetMovementDirection();
-    Vector2 * DetectMovementDirectionFromPlayer();
+    Vector2 DetectMovementDirectionFromPlayer();
     Vector2 DetectReleaseDirection();
     std::map<int, bool> keyPressedMap;
     bool IsVKeyPressed(int);

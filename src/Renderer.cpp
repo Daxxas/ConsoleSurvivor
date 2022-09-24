@@ -196,12 +196,14 @@ void Renderer::DisplayArena(Vector2 cameraTopLeft) {
     for (int x = 0; x < DISPLAY_WIDTH; ++x) {
         for (int y = 0; y < DISPLAY_HEIGHT; ++y) {
 
-            buffer[y][x] = *groundDeco[cameraTopLeft.y + y][cameraTopLeft.x + x];
-
             if(cameraTopLeft.x + x <= 0 || cameraTopLeft.x + x >= GameManager::ARENA_WIDTH-1 || cameraTopLeft.y + y <= 0 || cameraTopLeft.y + y >= GameManager::ARENA_HEIGHT-1) {
                 buffer[y][x].Char.UnicodeChar = '#';
                 buffer[y][x].Attributes = 0x0F;
+                continue;
             }
+
+            buffer[y][x] = *groundDeco[cameraTopLeft.y + y][cameraTopLeft.x + x];
+
         }
     }
 }

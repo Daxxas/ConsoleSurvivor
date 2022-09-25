@@ -9,26 +9,20 @@ GameManager::GameManager() {
     AddEntity(player);
     entities[validEntityCount-1]->isActive = true;
 
-    SpawnEnemy();
+    ManageSpawners();
     inputMenuTimer->start();
+
+    difficulty = 1;
+}
+
+void GameManager::ManageSpawners() {
+    spawners[spawnerCount] = new BatSpawner();
+    spawnerCount++;
 }
 
 void GameManager::AddEntity(Entity *entity) {
     entities[validEntityCount] = entity;
     validEntityCount++;
-}
-
-void GameManager::SpawnEnemy() {
-    Vector2 batpos = Vector2(20, 20);
-    SpawnBat(batpos, 1, 1, 1, 1);
-}
-
-void GameManager::SpawnBat(Vector2& spawnPos, int maxHealth, int damage, int attacksPerSecond, int moveSpeed) {
-    BatEnemy* bat = new BatEnemy(spawnPos, maxHealth, damage, attacksPerSecond, moveSpeed);
-    AddEntity(bat);
-    entities[validEntityCount - 1]->isActive = true;
-    enemies[aliveEnemiesCount] = bat;
-    aliveEnemiesCount++;
 }
 
 void GameManager::SetActiveLastEntity(bool val) {
@@ -41,6 +35,9 @@ void GameManager::RunGameLoop() {
             if(entities[i]->isActive) {
                 entities[i]->Update();
             }
+        }
+        for (int j = 0; j < spawnerCount; j++) {
+            spawners[j]->SpawnEnemies();
         }
     }
     else {
@@ -90,6 +87,10 @@ Vector2 GameManager::GetNearestEnemyPosition() {
     }
 
     return Vector2(enemies[indexOfNearestEnemy]->position.x, enemies[indexOfNearestEnemy]->position.y);
+}
+
+float GameManager::GetCurrentDifficulty() {
+	return difficulty;
 }
 
 GameManager* GameManager::Instance() {

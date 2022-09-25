@@ -31,7 +31,7 @@ void Bullet::Update() {
         if (enemy->isActive) {
             if (enemy->position == position) {
                 enemy->TakeDamage(this->damage);
-                isActive = false;
+                GameManager::Instance()->player->ReturnBullet(this);
             }
         }
     }
@@ -40,7 +40,7 @@ void Bullet::Update() {
         || position.x > GameManager::Instance()->ARENA_WIDTH-1 
         || position.y < 0 
         || position.y > GameManager::Instance()->ARENA_HEIGHT) {
-		isActive = false;
+        GameManager::Instance()->player->ReturnBullet(this);
 	}
 
 }
@@ -54,5 +54,6 @@ void Bullet::Move(Vector2& direction) {
 void Bullet::Reset() {
     this->position = Vector2(0, 0);
     this->direction = Vector2(0, 0);
-    isActive = false;
+    this->timer.getElapsedMs(true);
+    this->isActive = false;
 };

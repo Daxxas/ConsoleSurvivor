@@ -17,7 +17,7 @@ public:
     Bullet(Vector2& position, Vector2& direction, int damage, float speed);
     void Update() override;
     void Move(Vector2&) override;
-    void Reset();
+    virtual void Reset();
 };
 
 

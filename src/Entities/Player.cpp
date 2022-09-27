@@ -78,6 +78,7 @@ void Player::LevelUp() {
     maxXP = baseMaxXP + (level-1) * increaseByLevel;
     playerLeveledUp = true;
     GameManager::Instance()->pause = true;
+    // todo pause difficulty
     GameManager::Instance()->upgradeList->RefreshUpgrades();
 }
 

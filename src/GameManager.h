@@ -42,7 +42,11 @@ public:
     int spawnerCount = 0;
     bool pause = false;
     NYTimer *inputMenuTimer;
+    NYTimer *difficultyTimer;
     float difficulty;
+    float startDifficulty = 1;
+    float maxDifficulty = 5;
+    float timestampForMaxDifficultySec = 600;
 public:
     int selectedUpgradeIndex = 0;
     UpgradeList *upgradeList;
@@ -54,5 +58,6 @@ public:
 	Vector2* GetPlayerPosition();
     Vector2 GetNearestEnemyPosition();
     float GetCurrentDifficulty();
+    void UpdateDifficulty();
     void SetActiveLastEntity(bool val);
 };

@@ -3,6 +3,7 @@
 GameManager::GameManager() {
 	inputHandler = new InputHandler();
     inputMenuTimer = new NYTimer();
+    difficultyTimer = new NYTimer();
 	Vector2* playerSpawnPosition = new Vector2(ARENA_WIDTH/2, ARENA_HEIGHT/2);
 	player = new Player(*playerSpawnPosition, 1, 1, 1, 1, inputHandler);
     upgradeList = new UpgradeList();
@@ -11,8 +12,9 @@ GameManager::GameManager() {
 
     ManageSpawners();
     inputMenuTimer->start();
+    difficultyTimer->start();
 
-    difficulty = 1;
+    difficulty = startDifficulty;
 }
 
 void GameManager::ManageSpawners() {
@@ -39,6 +41,7 @@ void GameManager::RunGameLoop() {
         for (int j = 0; j < spawnerCount; j++) {
             spawners[j]->SpawnEnemies();
         }
+        UpdateDifficulty();
     }
     else {
         inputHandler->Update();
@@ -91,6 +94,18 @@ Vector2 GameManager::GetNearestEnemyPosition() {
 
 float GameManager::GetCurrentDifficulty() {
 	return difficulty;
+}
+
+void GameManager::UpdateDifficulty() {
+    if (difficulty == maxDifficulty) {
+        return;
+    }
+	
+	float timePassed = difficultyTimer->getElapsedSeconds(false);
+	float percentageOfMaxDiff = timePassed / timestampForMaxDifficultySec;
+    if (percentageOfMaxDiff > 1)
+        percentageOfMaxDiff = 1;
+	difficulty = startDifficulty + (percentageOfMaxDiff * (maxDifficulty-startDifficulty));
 }
 
 GameManager* GameManager::Instance() {

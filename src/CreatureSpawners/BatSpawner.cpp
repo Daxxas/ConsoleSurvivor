@@ -8,7 +8,7 @@ BatSpawner::BatSpawner() : CreatureSpawner() {
 void BatSpawner::SpawnEnemies() {
 	GameManager* gm = GameManager::Instance();
 	float diff = gm->GetCurrentDifficulty();
-	if (spawnTimer.getElapsedMs(false) > baseMsBetweenSpawns/diff) {
+	if (spawnTimer.getElapsedMs(false) > (float)baseMsBetweenSpawns/diff) {
 		// generate coords
 		Vector2* playerPos = gm->GetPlayerPosition();
 		bool hasSpawned = false;

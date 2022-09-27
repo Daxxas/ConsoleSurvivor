@@ -19,3 +19,10 @@ void Shooter::ReturnBullet(Bullet* bullet) {
     bullet->Reset();
     bullets.push_back(bullet);
 }
+
+void Shooter::Update() {
+    if(localTimer.getElapsedMs(false) > baseMsBetweenShots/shotSpeed) {
+        Shoot();
+        localTimer.getElapsedMs(true);
+    }
+}

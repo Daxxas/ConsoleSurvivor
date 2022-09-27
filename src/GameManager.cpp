@@ -4,7 +4,7 @@ GameManager::GameManager() {
 	inputHandler = new InputHandler();
     inputMenuTimer = new NYTimer();
 	Vector2* playerSpawnPosition = new Vector2(ARENA_WIDTH/2, ARENA_HEIGHT/2);
-	player = new Player(*playerSpawnPosition, 1, 1, 1, 1, inputHandler);
+	player = new Player(*playerSpawnPosition, 1, 1, 1, inputHandler);
     upgradeList = new UpgradeList();
     AddEntity(player);
     entities[validEntityCount-1]->isActive = true;

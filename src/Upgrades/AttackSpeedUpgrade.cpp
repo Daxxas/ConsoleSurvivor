@@ -31,6 +31,6 @@ AttackSpeedUpgrade::AttackSpeedUpgrade() {
 }
 
 void AttackSpeedUpgrade::ApplyUpgrade() {
-    GameManager::Instance()->player->shootSpeed += 0.1f;
+    GameManager::Instance()->player->shooters[0]->shotSpeed += 0.1f;
     level++;
 }

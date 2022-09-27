@@ -40,9 +40,9 @@ void Bullet::Update() {
     }
 
 	if (position.x < 1 
-        || position.x > GameManager::Instance()->ARENA_WIDTH-1 
+        || position.x > GameManager::ARENA_WIDTH-1
         || position.y < 0 
-        || position.y > GameManager::Instance()->ARENA_HEIGHT) {
+        || position.y > GameManager::ARENA_HEIGHT) {
         shooter->ReturnBullet(this);
 	}
 

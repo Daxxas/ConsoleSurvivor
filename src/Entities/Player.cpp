@@ -1,10 +1,9 @@
 #include "Player.h"
 
-Player::Player(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed, InputHandler * inputHandler) : Creature(position) {
+Player::Player(Vector2& position, int maxHealth, int damage, float moveSpeed, InputHandler * inputHandler) : Creature(position) {
     this->maxHealth = maxHealth;
     this->health = maxHealth;
     this->damage = damage;
-    this->shootSpeed = attacksPerSecond;
     this->moveSpeed = moveSpeed;
     this->inputHandler = inputHandler;
     this->lastHeadingDirection = Vector2(1, 0);
@@ -31,6 +30,7 @@ Player::Player(Vector2& position, int maxHealth, int damage, float attacksPerSec
     sprite[5].Attributes = 0x0003;
 
     shooters[0] = new BasicShooter();
+    shooters[1] = new HorizontalShooter();
 
     moveTimer.start();
     shootTimer.start();
@@ -48,11 +48,7 @@ void Player::Update() {
         }
     }
 
-    if(shootTimer.getElapsedMs(false) > baseMsBetweenShoots / GetShootSpeed()) {
-        Shoot();
-        this->shootTimer.getElapsedMs(true);
-    }
-
+    Shoot();
 }
 
 void Player::GiveXP(int xp) {
@@ -85,7 +81,7 @@ void Player::LevelUp() {
 
 void Player::Shoot() {
     for (Shooter *shooter : shooters) {
-        shooter->Shoot();
+        shooter->Update();
     }
 }
 

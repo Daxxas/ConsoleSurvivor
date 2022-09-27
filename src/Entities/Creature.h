@@ -16,7 +16,6 @@ protected:
     int baseMsBetweenMovements;
 public:
     float moveSpeed;
-    float shootSpeed;
     Creature();
     Creature(Vector2& position);
     Creature(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed);
@@ -24,7 +23,6 @@ public:
     void Update() {};
     virtual void TakeDamage(int)=0;
     virtual void Die()=0;
-    float& GetMoveSpeed() { return moveSpeed; }
     Vector2& GetPosition() { return position; }
 };
 

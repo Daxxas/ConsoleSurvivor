@@ -1,4 +1,5 @@
 #include "BasicShooter.h"
+#include "../GameManager.h"
 
 void BasicShooter::Shoot() {
     Bullet* bullet = GetBullet();
@@ -8,7 +9,7 @@ void BasicShooter::Shoot() {
 
 Bullet * BasicShooter::CreateBullet() {
     Vector2 *dir =  new Vector2(0, 0);
-    Bullet *bullet = new Bullet(*GameManager::Instance()->GetPlayerPosition(), *dir, 1, 0);
+    Bullet *bullet = new Bullet(this, *GameManager::Instance()->GetPlayerPosition(), *dir, 1, 0);
     bullet->isActive = true;
     GameManager::Instance()->AddEntity(bullet);
 

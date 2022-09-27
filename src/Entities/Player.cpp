@@ -30,6 +30,8 @@ Player::Player(Vector2& position, int maxHealth, int damage, float attacksPerSec
     sprite[4].Attributes = 0x0003;
     sprite[5].Attributes = 0x0003;
 
+    shooters[0] = new BasicShooter();
+
     moveTimer.start();
     shootTimer.start();
 }
@@ -82,31 +84,9 @@ void Player::LevelUp() {
 }
 
 void Player::Shoot() {
-    Bullet* bullet = GetBullet();
-    bullet->direction = lastHeadingDirection;
-}
-
-Bullet* Player::GetBullet() {
-    if(bullets.empty()) {
-        Vector2 *dir =  new Vector2(0, 0);
-        Bullet* bullet = new Bullet(position, *dir, 1, 0);
-        bullet->isActive = true;
-        GameManager::Instance()->AddEntity(bullet);
-
-        return bullet;
+    for (Shooter *shooter : shooters) {
+        shooter->Shoot();
     }
-    else {
-        Bullet* bullet = bullets.front();
-        bullet->isActive = true;
-        bullet->position = position;
-        bullets.pop_front();
-        return bullet;
-    }
-}
-
-void Player::ReturnBullet(Bullet* bullet) {
-    bullet->Reset();
-    bullets.push_back(bullet);
 }
 
 void Player::Damage (int& damage) {

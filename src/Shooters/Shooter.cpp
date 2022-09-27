@@ -1,4 +1,5 @@
 #include "Shooter.h"
+#include "../GameManager.h"
 
 Bullet* Shooter::GetBullet() {
     if(bullets.empty()) {

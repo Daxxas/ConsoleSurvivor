@@ -8,11 +8,10 @@
 #include "../GameManager.h"
 #include <iostream>
 #include <list>
-#include "Bullet.h"
 #include "Creature.h"
 #include "Entity.h"
-
-class Bullet;
+#include "../Shooters/Shooter.h"
+#include "../Shooters/BasicShooter.h"
 
 class Player : public Creature {
 private:
@@ -20,6 +19,8 @@ private:
     InputHandler * inputHandler;
     int baseMsBetweenMovements = 150;
     int baseMsBetweenShoots = 500;
+    static const int shootersCount = 1;
+    Shooter* shooters[shootersCount];
     void Shoot();
 public:
     Player(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed, InputHandler* inputHandler);

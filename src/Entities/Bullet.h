@@ -6,6 +6,8 @@
 #include "Entity.h"
 #include "../GameManager.h"
 
+class Creature;
+
 class Bullet : public Entity {
 private:
     int damage;
@@ -17,6 +19,7 @@ public:
     Bullet(Vector2& position, Vector2& direction, int damage, float speed);
     void Update() override;
     void Move(Vector2&) override;
+    bool CheckIfHits(Creature&);
     void Reset();
 };
 

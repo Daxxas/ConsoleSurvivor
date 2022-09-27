@@ -5,7 +5,6 @@ Bullet* Shooter::GetBullet() {
     if(bullets.empty()) {
         Bullet* bullet = CreateBullet();
         bullet->isActive = true;
-        GameManager::Instance()->AddEntity(bullet);
         return bullet;
     }
     else {

@@ -1,4 +1,7 @@
+#pragma once
+
 #include "MoveSpeedUpgrade.h"
+#include "../GameManager.h"
 
 MoveSpeedUpgrade::MoveSpeedUpgrade() {
 

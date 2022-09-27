@@ -40,7 +40,7 @@ void Renderer::Render() {
 
     DisplayArena(cameraTopLeft);
 
-    for(int i = 0 ; i < gameManager->validEntityCount; ++i) {
+    for(int i = 0 ; i < gameManager->validEntityCount; i++) {
 
         if(gameManager->entities[i]->isActive) {
             CHAR_INFO* spriteToDisplay = gameManager->entities[i]->Display();

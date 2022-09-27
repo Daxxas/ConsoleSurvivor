@@ -3,6 +3,7 @@
 //
 
 #include "AttackSpeedUpgrade.h"
+#include "../GameManager.h"
 
 AttackSpeedUpgrade::AttackSpeedUpgrade() {
 

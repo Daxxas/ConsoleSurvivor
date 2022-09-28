@@ -6,11 +6,13 @@
 #include "Upgrade.h"
 #include "AttackSpeedUpgrade.h"
 #include "MoveSpeedUpgrade.h"
+#include "HorizontalUpgrade.h"
+#include "VerticalUpgrade.h"
 #include <random>
 
 class UpgradeList {
 private:
-    static const int upgradesCount = 2;
+    static const int upgradesCount = 4;
     Upgrade* upgrades[upgradesCount];
     int weights[upgradesCount];
 public:

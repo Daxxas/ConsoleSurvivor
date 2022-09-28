@@ -9,8 +9,10 @@
 #include "Shooter.h"
 
 class HorizontalShooter : public Shooter {
+public:
     void Shoot() override;
     Bullet* CreateBullet() override;
+    HorizontalShooter();
 };
 
 

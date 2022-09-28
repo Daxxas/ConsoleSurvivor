@@ -9,6 +9,10 @@ UpgradeList::UpgradeList() {
     weights[0] = 10;
     upgrades[1] = new AttackSpeedUpgrade();
     weights[1] = 10;
+    upgrades[2] = new HorizontalUpgrade();
+    weights[2] = 10;
+    upgrades[3] = new VerticalUpgrade();
+    weights[3] = 10;
 
 }
 

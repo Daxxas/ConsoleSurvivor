@@ -12,6 +12,7 @@
 #include "Entity.h"
 #include "../Shooters/Shooter.h"
 #include "../Shooters/BasicShooter.h"
+#include "../Shooters/VerticalShooter.h"
 #include "../Shooters/HorizontalShooter.h"
 
 
@@ -20,7 +21,7 @@ private:
     NYTimer shootTimer;
     InputHandler * inputHandler;
     int baseMsBetweenMovements = 150;
-    static const int shootersCount = 2;
+    static const int shootersCount = 3;
     void Shoot();
 public:
     Player(Vector2& position, int maxHealth, int damage, float moveSpeed, InputHandler* inputHandler);

@@ -21,6 +21,9 @@ void Shooter::ReturnBullet(Bullet* bullet) {
 }
 
 void Shooter::Update() {
+    if(shotSpeed == 0) {
+        return;
+    }
     if(localTimer.getElapsedMs(false) > baseMsBetweenShots/shotSpeed) {
         Shoot();
         localTimer.getElapsedMs(true);

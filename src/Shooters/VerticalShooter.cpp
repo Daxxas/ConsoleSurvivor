@@ -1,26 +1,26 @@
 //
-// Created by Jacques on 27/09/2022.
+// Created by Jacques on 28/09/2022.
 //
 
-#include "HorizontalShooter.h"
+#include "VerticalShooter.h"
 #include "../GameManager.h"
 
-HorizontalShooter::HorizontalShooter() {
+VerticalShooter::VerticalShooter() {
     this->shotSpeed = 0;
 }
 
-void HorizontalShooter::Shoot() {
+void VerticalShooter::Shoot() {
     Bullet* bullet = GetBullet();
-    bullet->direction = Vector2(1, 0);
+    bullet->direction = Vector2(0, 1);
     bullet->position = *GameManager::Instance()->GetPlayerPosition();
 
 
     Bullet* bullet2 = GetBullet();
-    bullet2->direction = Vector2(-1, 0);
+    bullet2->direction = Vector2(0, -1);
     bullet2->position = *GameManager::Instance()->GetPlayerPosition();
 }
 
-Bullet * HorizontalShooter::CreateBullet() {
+Bullet * VerticalShooter::CreateBullet() {
     Vector2 *dir =  new Vector2(0, 0);
     Bullet *bullet = new Bullet(this, *GameManager::Instance()->GetPlayerPosition(), *dir, 1, 0);
     GameManager::Instance()->AddEntity(bullet);

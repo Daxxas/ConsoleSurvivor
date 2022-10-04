@@ -20,6 +20,8 @@ GameManager::GameManager() {
 void GameManager::ManageSpawners() {
     spawners[spawnerCount] = new BatSpawner();
     spawnerCount++;
+    spawners[spawnerCount] = new UwUSpawner();
+    spawnerCount++;
 }
 
 void GameManager::AddEntity(Entity *entity) {

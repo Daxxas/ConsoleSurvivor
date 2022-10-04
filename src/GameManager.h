@@ -6,9 +6,11 @@
 #include "InputHandler.h"
 #include "Entities/Player.h"
 #include "Entities/BatEnemy.h"
+#include "Entities/UwUEnemy.h"
 #include "Entities/Bullet.h"
 #include "CreatureSpawners/CreatureSpawner.h"
 #include "CreatureSpawners/BatSpawner.h"
+#include "CreatureSpawners/UwUSpawner.h"
 
 class Player;
 class UpgradeList;

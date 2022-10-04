@@ -9,8 +9,8 @@ AttackSpeedUpgrade::AttackSpeedUpgrade() {
     spriteHeight = 4;
     std::string lines[4] = {
             "_______ ",
-            "|      )",
-            "|  |--' ",
+            "|      O",
+            "|  |/_/ ",
             "|__|    "
     };
 

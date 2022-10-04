@@ -39,7 +39,7 @@ void Bullet::Update() {
         }
     }
 
-	if (position.x < 1 
+	if (position.x < 1
         || position.x > GameManager::ARENA_WIDTH-1
         || position.y < 0 
         || position.y > GameManager::ARENA_HEIGHT) {

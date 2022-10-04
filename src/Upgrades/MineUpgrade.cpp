@@ -1,19 +1,21 @@
-#pragma once
+//
+// Created by Jacques on 04/10/2022.
+//
 
-#include "MoveSpeedUpgrade.h"
+#include "MineUpgrade.h"
 #include "../GameManager.h"
 
-MoveSpeedUpgrade::MoveSpeedUpgrade() {
+MineUpgrade::MineUpgrade() {
 
     level = 0;
 
     spriteWidth = 8;
     spriteHeight = 4;
     std::string lines[4] = {
-            " ___    ",
-            "/___\\    ",
-            "|   |__ ",
-            "|______) "
+            "  ____  ",
+            " |    |",
+            "/------\\",
+            "|______|"
     };
 
     sprite = new CHAR_INFO[spriteWidth * spriteHeight];
@@ -25,10 +27,15 @@ MoveSpeedUpgrade::MoveSpeedUpgrade() {
         }
     }
 
-    name = "Move Speed++";
+    name = "Miner++";
 }
 
-void MoveSpeedUpgrade::ApplyUpgrade() {
-    GameManager::Instance()->player->moveSpeed += 0.1f;
+void MineUpgrade::ApplyUpgrade() {
+    if(level == 0) {
+        GameManager::Instance()->player->shooters[3]->shotSpeed = 1;
+    }
+    else {
+        GameManager::Instance()->player->shooters[3]->shotSpeed += 0.1f;
+    }
     level++;
 }

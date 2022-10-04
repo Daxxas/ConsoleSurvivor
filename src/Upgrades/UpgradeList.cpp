@@ -13,6 +13,8 @@ UpgradeList::UpgradeList() {
     weights[2] = 10;
     upgrades[3] = new VerticalUpgrade();
     weights[3] = 10;
+    upgrades[4] = new MineUpgrade();
+    weights[4] = 10;
 
 }
 

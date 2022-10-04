@@ -32,6 +32,7 @@ Player::Player(Vector2& position, int maxHealth, int damage, float moveSpeed, In
     shooters[0] = new BasicShooter();
     shooters[1] = new HorizontalShooter();
     shooters[2] = new VerticalShooter();
+    shooters[3] = new MineShooter();
 
     moveTimer.start();
     shootTimer.start();

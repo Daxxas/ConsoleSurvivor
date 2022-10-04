@@ -14,6 +14,7 @@
 #include "../Shooters/BasicShooter.h"
 #include "../Shooters/VerticalShooter.h"
 #include "../Shooters/HorizontalShooter.h"
+#include "../Shooters/MineShooter.h"
 
 
 class Player : public Creature {
@@ -21,7 +22,7 @@ private:
     NYTimer shootTimer;
     InputHandler * inputHandler;
     int baseMsBetweenMovements = 150;
-    static const int shootersCount = 3;
+    static const int shootersCount = 4;
     void Shoot();
 public:
     Player(Vector2& position, int maxHealth, int damage, float moveSpeed, InputHandler* inputHandler);

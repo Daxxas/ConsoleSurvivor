@@ -3,10 +3,13 @@
 //
 
 #include "Bullet.h"
+#include "../GameManager.h"
 
-Bullet::Bullet(Vector2& position, Vector2& direction, int damage, float speed) : Entity(position), direction(direction) {
+
+Bullet::Bullet(Shooter* shooter, Vector2& position, Vector2& direction, int damage, float speed) : Entity(position), direction(direction) {
     this->damage = damage;
     this->speed = speed;
+    this->shooter = shooter;
 
     spriteWidth = 1;
     spriteHeight = 1;
@@ -31,16 +34,16 @@ void Bullet::Update() {
         if (enemy->isActive) {
             if (CheckIfHits(*enemy)) {
                 enemy->TakeDamage(this->damage);
-                GameManager::Instance()->player->ReturnBullet(this);
+                shooter->ReturnBullet(this);
             }
         }
     }
 
-	if (position.x < 1 
-        || position.x > GameManager::Instance()->ARENA_WIDTH-1 
+	if (position.x < 1
+        || position.x > GameManager::ARENA_WIDTH-1
         || position.y < 0 
-        || position.y > GameManager::Instance()->ARENA_HEIGHT) {
-        GameManager::Instance()->player->ReturnBullet(this);
+        || position.y > GameManager::ARENA_HEIGHT) {
+        shooter->ReturnBullet(this);
 	}
 
 }

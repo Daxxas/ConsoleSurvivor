@@ -40,7 +40,7 @@ void Renderer::Render() {
 
     DisplayArena(cameraTopLeft);
 
-    for(int i = 0 ; i < gameManager->validEntityCount; ++i) {
+    for(int i = 0 ; i < gameManager->validEntityCount; i++) {
 
         if(gameManager->entities[i]->isActive) {
             CHAR_INFO* spriteToDisplay = gameManager->entities[i]->Display();
@@ -109,7 +109,7 @@ void Renderer::DrawUI() {
         buffer[DISPLAY_HEIGHT-1][i].Attributes = 0x0002;
     }
 
-    if(gameManager->player->playerLeveledUp) {
+    if(gameManager->player->playerLeveledUp == true) {
         int upgradeWidth = 80;
         int upgradeHeight = 20;
 

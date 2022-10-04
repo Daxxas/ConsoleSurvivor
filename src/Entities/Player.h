@@ -8,46 +8,42 @@
 #include "../GameManager.h"
 #include <iostream>
 #include <list>
-#include "Bullet.h"
 #include "Creature.h"
 #include "Entity.h"
+#include "../Shooters/Shooter.h"
+#include "../Shooters/BasicShooter.h"
+#include "../Shooters/VerticalShooter.h"
+#include "../Shooters/HorizontalShooter.h"
+#include "../Shooters/MineShooter.h"
 
-class Bullet;
 
 class Player : public Creature {
 private:
     NYTimer shootTimer;
     InputHandler * inputHandler;
     int baseMsBetweenMovements = 150;
-    int baseMsBetweenShoots = 500;
-    Vector2 lastHeadingDirection;
+    static const int shootersCount = 4;
     void Shoot();
-    void LevelUp();
-    const int baseMaxXP = 5;
 public:
-    Player(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed, InputHandler* inputHandler);
+    Player(Vector2& position, int maxHealth, int damage, float moveSpeed, InputHandler* inputHandler);
+    Shooter* shooters[shootersCount];
     void Damage(int& damage);
 	void Move(Vector2& direction);
     bool checkIfMoveIsAllowed(Vector2& direction);
     void Update();
 	void TakeDamage(int damage) override;
     void Die() override;
-    float& GetMoveSpeed() { return moveSpeed;}
-    float& GetShootSpeed() { return shootSpeed;}
     Vector2& GetPosition() { return position; }
-    float shootSpeed;
+    Vector2 lastHeadingDirection;
+// XP
     int xp;
     int maxXP;
     int level = 1;
     bool playerLeveledUp = false;
     void GiveXP(int xp);
-// Bullet management
-public:
-    std::list<Bullet*> bullets;
-    Bullet* GetBullet();
-    void ReturnBullet(Bullet* bullet);
 private:
-    int lastBulletIndex = 0;
+    void LevelUp();
+    const int baseMaxXP = 5;
 };
 
 

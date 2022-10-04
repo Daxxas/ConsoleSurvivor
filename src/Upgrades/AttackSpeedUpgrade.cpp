@@ -1,8 +1,5 @@
-//
-// Created by daxxas on 24/09/2022.
-//
-
 #include "AttackSpeedUpgrade.h"
+#include "../GameManager.h"
 
 AttackSpeedUpgrade::AttackSpeedUpgrade() {
 
@@ -12,8 +9,8 @@ AttackSpeedUpgrade::AttackSpeedUpgrade() {
     spriteHeight = 4;
     std::string lines[4] = {
             "_______ ",
-            "|      )",
-            "|  |--' ",
+            "|      O",
+            "|  |/_/ ",
             "|__|    "
     };
 
@@ -30,6 +27,6 @@ AttackSpeedUpgrade::AttackSpeedUpgrade() {
 }
 
 void AttackSpeedUpgrade::ApplyUpgrade() {
-    GameManager::Instance()->player->shootSpeed += 0.1f;
+    GameManager::Instance()->player->shooters[0]->shotSpeed += 0.1f;
     level++;
 }

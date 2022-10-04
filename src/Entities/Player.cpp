@@ -1,10 +1,9 @@
 #include "Player.h"
 
-Player::Player(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed, InputHandler * inputHandler) : Creature(position) {
+Player::Player(Vector2& position, int maxHealth, int damage, float moveSpeed, InputHandler * inputHandler) : Creature(position) {
     this->maxHealth = maxHealth;
     this->health = maxHealth;
     this->damage = damage;
-    this->shootSpeed = attacksPerSecond;
     this->moveSpeed = moveSpeed;
     this->inputHandler = inputHandler;
     this->lastHeadingDirection = Vector2(1, 0);
@@ -30,6 +29,11 @@ Player::Player(Vector2& position, int maxHealth, int damage, float attacksPerSec
     sprite[4].Attributes = 0x0003;
     sprite[5].Attributes = 0x0003;
 
+    shooters[0] = new BasicShooter();
+    shooters[1] = new HorizontalShooter();
+    shooters[2] = new VerticalShooter();
+    shooters[3] = new MineShooter();
+
     moveTimer.start();
     shootTimer.start();
 }
@@ -46,11 +50,7 @@ void Player::Update() {
         }
     }
 
-    if(shootTimer.getElapsedMs(false) > baseMsBetweenShoots / GetShootSpeed()) {
-        Shoot();
-        this->shootTimer.getElapsedMs(true);
-    }
-
+    Shoot();
 }
 
 void Player::GiveXP(int xp) {
@@ -83,8 +83,9 @@ void Player::LevelUp() {
 }
 
 void Player::Shoot() {
-    Bullet* bullet = GetBullet();
-    bullet->direction = lastHeadingDirection;
+    for (Shooter *shooter : shooters) {
+        shooter->Update();
+    }
 }
 
 Bullet* Player::GetBullet() {
@@ -104,11 +105,6 @@ Bullet* Player::GetBullet() {
         bullets.pop_front();
         return bullet;
     }
-}
-
-void Player::ReturnBullet(Bullet* bullet) {
-    bullet->Reset();
-    bullets.push_back(bullet);
 }
 
 void Player::Damage (int& damage) {

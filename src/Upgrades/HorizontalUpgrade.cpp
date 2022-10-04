@@ -1,19 +1,17 @@
-#pragma once
-
-#include "MoveSpeedUpgrade.h"
+#include "HorizontalUpgrade.h"
 #include "../GameManager.h"
 
-MoveSpeedUpgrade::MoveSpeedUpgrade() {
+HorizontalUpgrade::HorizontalUpgrade() {
 
     level = 0;
 
     spriteWidth = 8;
     spriteHeight = 4;
     std::string lines[4] = {
-            " ___    ",
-            "/___\\    ",
-            "|   |__ ",
-            "|______) "
+            "        ",
+            "        ",
+            "<--o--> ",
+            "        "
     };
 
     sprite = new CHAR_INFO[spriteWidth * spriteHeight];
@@ -25,10 +23,15 @@ MoveSpeedUpgrade::MoveSpeedUpgrade() {
         }
     }
 
-    name = "Move Speed++";
+    name = "Horiz. Shoot++";
 }
 
-void MoveSpeedUpgrade::ApplyUpgrade() {
-    GameManager::Instance()->player->moveSpeed += 0.1f;
+void HorizontalUpgrade::ApplyUpgrade() {
+    if(level == 0) {
+        GameManager::Instance()->player->shooters[1]->shotSpeed = 1;
+    }
+    else {
+        GameManager::Instance()->player->shooters[1]->shotSpeed += 0.1f;
+    }
     level++;
 }

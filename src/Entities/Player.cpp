@@ -88,25 +88,6 @@ void Player::Shoot() {
     }
 }
 
-Bullet* Player::GetBullet() {
-    if(bullets.empty()) {
-        Vector2 *dir =  new Vector2(0, 0);
-        Vector2 bulletSpawnPos = Vector2(position.x+1, position.y);
-        Bullet* bullet = new Bullet(bulletSpawnPos, *dir, 1, 0);
-        bullet->isActive = true;
-        GameManager::Instance()->AddEntity(bullet);
-
-        return bullet;
-    }
-    else {
-        Bullet* bullet = bullets.front();
-        bullet->isActive = true;
-        bullet->position = position;
-        bullets.pop_front();
-        return bullet;
-    }
-}
-
 void Player::Damage (int& damage) {
 
 }

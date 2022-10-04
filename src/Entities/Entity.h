@@ -18,4 +18,7 @@ public:
     int spriteWidth;
     int spriteHeight;
     CHAR_INFO* sprite;
+
+    int GetSpriteWidth() { return spriteWidth; }
+    int GetSpriteHeight() { return spriteHeight; }
 };

@@ -8,6 +8,8 @@
 
 class Shooter;
 
+class Creature;
+
 class Bullet : public Entity {
 private:
     int damage;
@@ -21,6 +23,7 @@ public:
     void Update() override;
     void Move(Vector2&) override;
     virtual void Reset();
+    bool CheckIfHits(Creature&);
 };
 
 

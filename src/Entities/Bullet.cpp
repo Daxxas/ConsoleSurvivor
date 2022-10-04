@@ -32,7 +32,7 @@ void Bullet::Update() {
     for (int i = 0; i < GameManager::Instance()->aliveEnemiesCount; i++) {
         Creature *enemy = GameManager::Instance()->enemies[i];
         if (enemy->isActive) {
-            if (enemy->position == position) {
+            if (CheckIfHits(*enemy)) {
                 enemy->TakeDamage(this->damage);
                 shooter->ReturnBullet(this);
             }
@@ -52,6 +52,17 @@ void Bullet::Move(Vector2& direction) {
     Vector2 directionBoostedHorizontal = direction;
     directionBoostedHorizontal.x *= Entity::horizontalSpeedBooster;
     position = position.add(directionBoostedHorizontal);
+}
+
+bool Bullet::CheckIfHits(Creature& entity) {
+    int entityWidth = entity.GetSpriteWidth();
+    int entityHeight = entity.GetSpriteHeight();
+    if (position.x <= entity.position.x+entityWidth && position.x >= entity.position.x) {
+        if (position.y <= entity.position.y+entityHeight && position.y >= entity.position.y) {
+            return true;
+        }
+    }
+    return false;
 }
 
 void Bullet::Reset() {

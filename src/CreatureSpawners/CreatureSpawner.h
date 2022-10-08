@@ -11,7 +11,7 @@ public:
     virtual void SpawnEnemies() = 0;
 protected:
     int baseMsBetweenSpawns;
-    int minDistanceFromPlayer = 110;
-    int maxDistanceFromPlayer = 150;
+    int minDistanceFromPlayer = 210;
+    int maxDistanceFromPlayer = 260;
     NYTimer spawnTimer;
 };

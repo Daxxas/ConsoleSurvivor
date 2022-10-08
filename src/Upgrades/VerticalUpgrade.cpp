@@ -32,7 +32,7 @@ VerticalUpgrade::VerticalUpgrade() {
 
 void VerticalUpgrade::ApplyUpgrade() {
     if(level == 0) {
-        GameManager::Instance()->player->shooters[2]->shotSpeed = 1;
+        GameManager::Instance()->player->shooters[2]->shotSpeed = 0.3f;
     }
     else {
         GameManager::Instance()->player->shooters[2]->shotSpeed += 0.1f;

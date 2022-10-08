@@ -32,7 +32,7 @@ MineUpgrade::MineUpgrade() {
 
 void MineUpgrade::ApplyUpgrade() {
     if(level == 0) {
-        GameManager::Instance()->player->shooters[3]->shotSpeed = 1;
+        GameManager::Instance()->player->shooters[3]->shotSpeed = 0.1f;
     }
     else {
         GameManager::Instance()->player->shooters[3]->shotSpeed += 0.1f;

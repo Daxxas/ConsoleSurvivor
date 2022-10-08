@@ -44,6 +44,7 @@ void UwUEnemy::TakeDamage(int dmg) {
 }
 
 void UwUEnemy::Die() {
+    GameManager::Instance()->player->GiveXP(1);
     isActive = false;
     // TODO
 }

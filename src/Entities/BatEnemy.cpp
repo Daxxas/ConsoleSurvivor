@@ -44,6 +44,7 @@ void BatEnemy::TakeDamage(int dmg) {
 }
 
 void BatEnemy::Die() {
+    GameManager::Instance()->player->GiveXP(1);
     isActive = false;
     // TODO
 }

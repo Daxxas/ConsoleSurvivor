@@ -28,7 +28,7 @@ HorizontalUpgrade::HorizontalUpgrade() {
 
 void HorizontalUpgrade::ApplyUpgrade() {
     if(level == 0) {
-        GameManager::Instance()->player->shooters[1]->shotSpeed = 1;
+        GameManager::Instance()->player->shooters[1]->shotSpeed = 0.3f;
     }
     else {
         GameManager::Instance()->player->shooters[1]->shotSpeed += 0.1f;

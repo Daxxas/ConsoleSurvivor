@@ -13,7 +13,7 @@ private:
     NYTimer localTimer;
 public:
     int baseMsBetweenShots = 500;
-    int shotSpeed = 1;
+    float shotSpeed = 1;
     virtual void Shoot() = 0;
     virtual void Update();
     virtual Bullet* GetBullet();

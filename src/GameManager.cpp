@@ -33,7 +33,7 @@ void GameManager::SetActiveLastEntity(bool val) {
     entities[validEntityCount-1]->isActive = val;
 }
 
-void GameManager::RunGameLoop() {
+bool GameManager::RunGameLoop() {
     if(!pause) {
         for (int i = 0; i < validEntityCount; ++i) {
             if(entities[i]->isActive) {
@@ -64,7 +64,11 @@ void GameManager::RunGameLoop() {
             player->playerLeveledUp = false;
         }
     }
+    return !CheckIfGameHasEnded();
+}
 
+bool GameManager::CheckIfGameHasEnded() {
+	return player->isDead;
 }
 
 Vector2* GameManager::GetPlayerPosition() {

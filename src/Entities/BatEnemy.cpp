@@ -34,6 +34,13 @@ void BatEnemy::Update() {
 		
         this->timer.getElapsedMs(true);
     }
+
+	Vector2 playerPosition = *GameManager::Instance()->GetPlayerPosition();
+    if (playerPosition.x <= position.x + spriteWidth && playerPosition.x >= position.x) {
+        if (playerPosition.y <= position.y + spriteHeight && playerPosition.y >= position.y) {
+            GameManager::Instance()->player->TakeDamage(1);
+        }
+    }
 }
 
 void BatEnemy::TakeDamage(int dmg) {

@@ -25,6 +25,7 @@ private:
     static const int shootersCount = 4;
     void Shoot();
 public:
+    bool isDead = false;
     Player(Vector2& position, int maxHealth, int damage, float moveSpeed, InputHandler* inputHandler);
     Shooter* shooters[shootersCount];
     void Damage(int& damage);

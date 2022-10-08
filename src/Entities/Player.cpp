@@ -104,11 +104,11 @@ void Player::Move(Vector2& direction) {
 }
 
 void Player::TakeDamage(int dmg) {
-	
+    Die();
 }
 
 void Player::Die() {
-	
+    this->isDead = true;
 }
 
 bool Player::checkIfMoveIsAllowed(Vector2& direction) {

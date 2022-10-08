@@ -18,7 +18,7 @@ void ConsoleSurvivorGame::launchGame() {
     bool gameIsRunning = true;
 	
     while(gameIsRunning) {
-        GameManager::Instance()->RunGameLoop();
+        gameIsRunning = GameManager::Instance()->RunGameLoop();
         renderer->Render();
     }
 }

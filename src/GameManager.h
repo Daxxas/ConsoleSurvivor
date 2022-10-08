@@ -52,7 +52,8 @@ public:
 public:
     int selectedUpgradeIndex = 0;
     UpgradeList *upgradeList;
-    void RunGameLoop();
+    bool RunGameLoop();
+    bool CheckIfGameHasEnded();
     void AddEntity(Entity * entity);
     void SpawnEnemy();
     void SpawnBat(Vector2&, int, int, int, int);

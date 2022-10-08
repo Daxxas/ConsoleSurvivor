@@ -84,6 +84,24 @@ void Renderer::CleanBuffer() {
 
 void Renderer::DrawUI() {
 
+    // Timer text
+    int timer = gameManager->difficultyTimer->getElapsedMs(false) / 1000;
+    int minutes = timer / 60;
+    std::string minutesString = std::to_string(minutes);
+    if(minutes < 10) {
+        minutesString = "0" + minutesString;
+    }
+    int seconds = timer % 60;
+    std::string secondsString = std::to_string(seconds);
+    if(seconds < 10) {
+        secondsString = "0" + secondsString;
+    }
+    std::string timerString = "Timer: " + minutesString + ":" + secondsString;
+    for (int i = 0; i < timerString.length(); ++i) {
+        buffer[3][(DISPLAY_WIDTH-timerString.length())/2 + i].Char.UnicodeChar = timerString[i];
+        buffer[3][(DISPLAY_WIDTH-timerString.length())/2 + i].Attributes = FOREGROUND_RED;
+    }
+
     // XP BAR
     float xpPercent = (float)gameManager->player->xp / (float)gameManager->player->maxXP;
     int xpBarWidth = (int)(DISPLAY_WIDTH * xpPercent);

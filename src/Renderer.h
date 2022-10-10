@@ -19,5 +19,6 @@ private:
     HANDLE hOutput;
     void DisplayArena(Vector2 cameraTopLeft);
     void DrawUI();
+    void DrawMainMenuUI();
     GameManager *gameManager;
 };

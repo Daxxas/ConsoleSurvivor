@@ -33,41 +33,47 @@ void Renderer::Render() {
 
     CleanBuffer();
 
-    cameraPosition = *gameManager->GetPlayerPosition();
+    if(GameManager::Instance()->gameStarted == false) {
+        DrawMainMenuUI();
+    }
+    else {
+        cameraPosition = *gameManager->GetPlayerPosition();
 
-    Vector2 cameraTopLeft = Vector2(cameraPosition.x - DISPLAY_WIDTH / 2, cameraPosition.y - DISPLAY_HEIGHT / 2);
-    Vector2 cameraBottomRight = Vector2(cameraPosition.x + DISPLAY_WIDTH / 2, cameraPosition.y + DISPLAY_HEIGHT / 2);
+        Vector2 cameraTopLeft = Vector2(cameraPosition.x - DISPLAY_WIDTH / 2, cameraPosition.y - DISPLAY_HEIGHT / 2);
+        Vector2 cameraBottomRight = Vector2(cameraPosition.x + DISPLAY_WIDTH / 2, cameraPosition.y + DISPLAY_HEIGHT / 2);
 
-    DisplayArena(cameraTopLeft);
+        DisplayArena(cameraTopLeft);
 
-    for(int i = 0 ; i < gameManager->validEntityCount; i++) {
+        // Draw entities
+        for(int i = 0 ; i < gameManager->validEntityCount; i++) {
 
-        if(gameManager->entities[i]->isActive) {
-            CHAR_INFO* spriteToDisplay = gameManager->entities[i]->Display();
-            Vector2 entityPosition = gameManager->entities[i]->position;
+            if(gameManager->entities[i]->isActive) {
+                CHAR_INFO* spriteToDisplay = gameManager->entities[i]->Display();
+                Vector2 entityPosition = gameManager->entities[i]->position;
 
-            int yOffset = 0;
-            int xOffset = 0;
-            for (int j = 0; j < gameManager->entities[i]->spriteWidth * gameManager->entities[i]->spriteHeight; ++j) {
+                int yOffset = 0;
+                int xOffset = 0;
+                for (int j = 0; j < gameManager->entities[i]->spriteWidth * gameManager->entities[i]->spriteHeight; ++j) {
 
-                if(xOffset >= gameManager->entities[i]->spriteWidth) {
-                    yOffset++;
-                    xOffset = 0;
+                    if(xOffset >= gameManager->entities[i]->spriteWidth) {
+                        yOffset++;
+                        xOffset = 0;
+                    }
+
+                    Vector2 spritePosition = Vector2(entityPosition.x + xOffset, entityPosition.y + yOffset);
+
+                    if(spritePosition.x >= cameraTopLeft.x && spritePosition.x <= cameraBottomRight.x && spritePosition.y >= cameraTopLeft.y && spritePosition.y <= cameraBottomRight.y) {
+                        int x = spritePosition.x - cameraTopLeft.x;
+                        int y = spritePosition.y - cameraTopLeft.y;
+                        buffer[y][x] = spriteToDisplay[j];
+                    }
+                    xOffset++;
                 }
-
-                Vector2 spritePosition = Vector2(entityPosition.x + xOffset, entityPosition.y + yOffset);
-
-                if(spritePosition.x >= cameraTopLeft.x && spritePosition.x <= cameraBottomRight.x && spritePosition.y >= cameraTopLeft.y && spritePosition.y <= cameraBottomRight.y) {
-                    int x = spritePosition.x - cameraTopLeft.x;
-                    int y = spritePosition.y - cameraTopLeft.y;
-                    buffer[y][x] = spriteToDisplay[j];
-                }
-                xOffset++;
             }
         }
-    }
 
-    DrawUI();
+        DrawUI();
+    }
 
     WriteConsoleOutput(hOutput, (CHAR_INFO*)buffer, dwBufferSize, dwBufferCoord, &rcRegion);
     //std::cout << "x:" << gameManager->player->position.x << "- y:" << gameManager->player->position.y;
@@ -83,7 +89,6 @@ void Renderer::CleanBuffer() {
 }
 
 void Renderer::DrawUI() {
-
     // Timer text
     int timer = gameManager->difficultyTimer->getElapsedMs(false) / 1000;
     int minutes = timer / 60;
@@ -206,6 +211,15 @@ void Renderer::DrawUI() {
                 buffer[topLeft.y + upgradeHeight/2 + spriteHeight/2 + 1][(DISPLAY_WIDTH-upgradeChoiceName.length())/2 + i * (spriteWidth + 10) + j - 18].Attributes = upgradeColor;
             }
         }
+    }
+}
+
+void Renderer::DrawMainMenuUI() {
+    std::string mainMenuText = "PRESS SPACE TO PLAY";
+
+    for (int i = 0; i < mainMenuText.length(); ++i) {
+        buffer[DISPLAY_HEIGHT/2][(DISPLAY_WIDTH-mainMenuText.length())/2 + i].Char.UnicodeChar = mainMenuText[i];
+        buffer[DISPLAY_HEIGHT/2][(DISPLAY_WIDTH-mainMenuText.length())/2 + i].Attributes = FOREGROUND_BLUE | FOREGROUND_INTENSITY;
     }
 }
 

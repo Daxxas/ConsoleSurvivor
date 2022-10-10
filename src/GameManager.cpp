@@ -34,36 +34,45 @@ void GameManager::SetActiveLastEntity(bool val) {
 }
 
 bool GameManager::RunGameLoop() {
-    if(!pause) {
-        for (int i = 0; i < validEntityCount; ++i) {
-            if(entities[i]->isActive) {
-                entities[i]->Update();
+    if(gameStarted == true) {
+        if(!pause) {
+            for (int i = 0; i < validEntityCount; ++i) {
+                if(entities[i]->isActive) {
+                    entities[i]->Update();
+                }
+            }
+            for (int j = 0; j < spawnerCount; j++) {
+                spawners[j]->SpawnEnemies();
+            }
+            UpdateDifficulty();
+        }
+        else {
+            inputHandler->Update();
+
+            Vector2 direction = inputHandler->DetectReleaseDirection();
+
+            if(direction.x == 1 || direction.x == -1) {
+                selectedUpgradeIndex += direction.x;
+                if(selectedUpgradeIndex == -1) {
+                    selectedUpgradeIndex = upgradeList->choiceCount-1;
+                }
+                selectedUpgradeIndex = selectedUpgradeIndex % upgradeList->choiceCount;
+            }
+
+            if(inputHandler->IsVKeyReleased(VK_SPACE)) {
+                upgradeList->currentUpgrades[selectedUpgradeIndex]->ApplyUpgrade();
+                pause = false;
+                player->playerLeveledUp = false;
             }
         }
-        for (int j = 0; j < spawnerCount; j++) {
-            spawners[j]->SpawnEnemies();
-        }
-        UpdateDifficulty();
     }
     else {
         inputHandler->Update();
-
-        Vector2 direction = inputHandler->DetectReleaseDirection();
-
-        if(direction.x == 1 || direction.x == -1) {
-            selectedUpgradeIndex += direction.x;
-            if(selectedUpgradeIndex == -1) {
-                selectedUpgradeIndex = upgradeList->choiceCount-1;
-            }
-            selectedUpgradeIndex = selectedUpgradeIndex % upgradeList->choiceCount;
-        }
-
         if(inputHandler->IsVKeyReleased(VK_SPACE)) {
-            upgradeList->currentUpgrades[selectedUpgradeIndex]->ApplyUpgrade();
-            pause = false;
-            player->playerLeveledUp = false;
+            gameStarted = true;
         }
     }
+
     return !CheckIfGameHasEnded();
 }
 

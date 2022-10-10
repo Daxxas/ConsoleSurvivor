@@ -43,6 +43,7 @@ public:
     int aliveEnemiesCount = 0;
     int spawnerCount = 0;
     bool pause = false;
+    bool gameStarted = false;
     NYTimer *inputMenuTimer;
     NYTimer *difficultyTimer;
     float difficulty;

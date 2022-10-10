@@ -1,6 +1,6 @@
 #include "BatEnemy.h"
 
-BatEnemy::BatEnemy(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed) : Creature(position) {
+BatEnemy::BatEnemy(Vector2 position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed) : Creature(position) {
 
     this->maxHealth = maxHealth;
     this->health = maxHealth;

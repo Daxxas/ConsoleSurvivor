@@ -1,6 +1,6 @@
 #include "UwUEnemy.h"
 
-UwUEnemy::UwUEnemy(Vector2& position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed) : Creature(position) {
+UwUEnemy::UwUEnemy(Vector2 position, int maxHealth, int damage, float attacksPerSecond, float moveSpeed) : Creature(position) {
 
     this->maxHealth = maxHealth;
     this->health = maxHealth;

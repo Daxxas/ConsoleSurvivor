@@ -25,7 +25,7 @@ private:
     ~GameManager();
 public:
     static GameManager* Instance();
-
+    static void RemoveInstance();
 public:
     static const int ARENA_WIDTH = 300;
     static const int ARENA_HEIGHT = 300;

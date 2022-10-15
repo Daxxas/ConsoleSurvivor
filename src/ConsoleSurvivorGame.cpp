@@ -7,22 +7,20 @@ ConsoleSurvivorGame::ConsoleSurvivorGame(){
 }
 
 void ConsoleSurvivorGame::launchGame() {
-    HANDLE hOutput = (HANDLE)GetStdHandle(STD_OUTPUT_HANDLE);
-
-    ConsoleSurvivorGame::PrepareWindowStyle(hOutput);
-
-    Renderer *renderer = new Renderer(hOutput);
-
-    int sleepTime = 0;
-    unsigned long loopDurationMs;
     bool gameIsRunning = true;
-	
-    while(gameIsRunning) {
-        gameIsRunning = GameManager::Instance()->RunGameLoop();
-        renderer->Render();
+    while (gameIsRunning) {
+        HANDLE hOutput = (HANDLE)GetStdHandle(STD_OUTPUT_HANDLE);
+        ConsoleSurvivorGame::PrepareWindowStyle(hOutput);
+        Renderer* renderer = new Renderer(hOutput);
+
+        bool playerIsAlive = true;
+        while (playerIsAlive) {
+            playerIsAlive = GameManager::Instance()->RunGameLoop();
+            renderer->Render();
+        }
+        GameManager::RemoveInstance();
     }
 }
-
 
 
 void ConsoleSurvivorGame::HideCaret(HANDLE& hOutput) {

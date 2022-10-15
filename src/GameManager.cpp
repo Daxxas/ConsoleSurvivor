@@ -130,6 +130,10 @@ GameManager* GameManager::Instance() {
     return instance;
 }
 
+void GameManager::RemoveInstance() {
+    GameManager::instance = nullptr;
+}
+
 GameManager * GameManager::instance = nullptr;
 
 GameManager::~GameManager() = default;

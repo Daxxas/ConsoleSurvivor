@@ -44,8 +44,6 @@ void Player::Update() {
     if (moveTimer.getElapsedMs(false) > baseMsBetweenMovements/moveSpeed) {
         if (direction.x != 0 || direction.y != 0) {
             Move(direction);
-            // Debug, todo : remove
-            GiveXP(1);
             this->moveTimer.getElapsedMs(true);
         }
     }

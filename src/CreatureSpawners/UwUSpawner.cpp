@@ -17,13 +17,8 @@ void UwUSpawner::SpawnEnemies() {
 			int randomWidth = rand() % (gm->ARENA_WIDTH - 3) + 3;
 			Vector2 distanceFromPlayer = Vector2(randomWidth, randomHeight) - *playerPos;
 
-			std::wstring s = std::to_wstring(distanceFromPlayer.GetMag());
-			OutputDebugString(s.c_str());
-
 			if (distanceFromPlayer.GetMag() > minDistanceFromPlayer
 				|| distanceFromPlayer.GetMag() < maxDistanceFromPlayer) {
-				std::wstring s = std::to_wstring(randomWidth);
-				OutputDebugString(s.c_str());
 				UwUEnemy* uwu = new UwUEnemy(Vector2(randomWidth, randomHeight), 1, 1, 1, 1);
 				gm->AddEntity(uwu);
 				gm->entities[gm->validEntityCount - 1]->isActive = true;
